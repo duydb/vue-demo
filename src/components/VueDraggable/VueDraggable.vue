@@ -92,6 +92,12 @@
     background-color: #efefef;
   }
   .list-container {
+    user-select: none;
     min-height: 100px;
+    background: rgba(77, 144, 247, 0.13);
+  }
+  .list-container .list-group-item {
+    user-select: none;
+    /* border-bottom: 1px solid rgba(0,0,0,.125); */
   }
 </style>
