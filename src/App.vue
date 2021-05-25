@@ -34,18 +34,22 @@
   </div>
 </template>
 <script>
-  import VueDraggableDemo from './components/VueDraggable/VueDraggable.vue'
+import VueDraggable from './components/VueDraggable/VueDraggable.vue'
+import MultiselectDemo from './components/Multiselect/MultiselectDemo.vue'
 
-  export default {
-    name: 'App',
-    data() {
-      return {
-        components: [VueDraggableDemo],
-        selected: null
-      }
-    },
-    mounted() {
-      this.selected = this.components[0]
+export default {
+  name: 'App',
+  data() {
+    return {
+      components: [
+        MultiselectDemo,
+        VueDraggable
+      ],
+      selected: null
     }
+  },
+  mounted() {
+    this.selected = this.components[0]
   }
+}
 </script>

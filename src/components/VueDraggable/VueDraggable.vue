@@ -59,33 +59,33 @@
   </div>
 </template>
 <script>
-  import draggable from 'vuedraggable'
-  let counter = 0
-  export default {
-    name: 'VueDraggableDemo',
-    components: {
-      draggable
-    },
-    data() {
-      return {
-        list1: [],
-        list2: []
-      }
-    },
-    mounted() {
-      this.addItem(this.list1)
-      this.addItem(this.list1)
-      this.addItem(this.list1)
-      this.addItem(this.list2)
-    },
-    methods: {
-      addItem(arr) {
-        if (!arr) return
-        counter += 1
-        arr.push(counter)
-      }
+import draggable from 'vuedraggable'
+let counter = 0
+export default {
+  name: 'VueDraggable',
+  components: {
+    draggable
+  },
+  data() {
+    return {
+      list1: [],
+      list2: []
+    }
+  },
+  mounted() {
+    this.addItem(this.list1)
+    this.addItem(this.list1)
+    this.addItem(this.list1)
+    this.addItem(this.list2)
+  },
+  methods: {
+    addItem(arr) {
+      if (!arr) return
+      counter += 1
+      arr.push(counter)
     }
   }
+}
 </script>
 <style>
   .sortable-ghost {
