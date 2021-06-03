@@ -8,26 +8,21 @@
         </span>
       </div>
     </nav>
-    <div class="container mt-4">
+    <div class="container-fluid mt-4">
       <div class="row">
         <div class="col-12 col-sm-3">
-          <div class="card">
+          <Card hide-header body-class="p-0">
             <div class="list-group list-group-flush">
               <a @click.prevent="selected = comp" v-for="(comp, idx) in components" :key="idx" class="list-group-item" :class="{'active': selected === comp}" href="#">
                 {{comp.name}}
               </a>
             </div>
-          </div>
+          </Card>
         </div>
         <div class="col-12 col-sm-9">
-          <div v-if="selected" class="card">
-            <div class="card-header">
-              {{selected.name}}
-            </div>
-            <div class="card-body">
-              <component :is="selected"></component>
-            </div>
-          </div>
+          <Card v-if="selected" :title="selected.name">
+            <component :is="selected"></component>
+          </Card>
         </div>
       </div>
     </div>
@@ -36,12 +31,14 @@
 <script>
 import VueDraggable from './components/VueDraggable/VueDraggable.vue'
 import MultiselectDemo from './components/Multiselect/MultiselectDemo.vue'
+import PermissionDemo from './components/Permission/PermissionDemo'
 
 export default {
   name: 'App',
   data() {
     return {
       components: [
+        PermissionDemo,
         MultiselectDemo,
         VueDraggable
       ],

@@ -81,6 +81,7 @@
   font-size: 12px;
   cursor: text;
   position: relative;
+  background-color: #fff;
 }
 
 .form-material .mmultiselect-container .mmultiselect {
@@ -125,7 +126,7 @@
 }
 
 .mmultiselect-container .selected-tag:first-child {
-  margin-left: -6px;
+  /*margin-left: -6px;*/
 }
 
 .mmultiselect-container .values-container-single-show {
