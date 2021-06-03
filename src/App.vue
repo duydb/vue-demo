@@ -13,14 +13,15 @@
         <div class="col-12 col-sm-3">
           <Card hide-header body-class="p-0">
             <div class="list-group list-group-flush">
-              <a @click.prevent="selected = comp" v-for="(comp, idx) in components" :key="idx" class="list-group-item" :class="{'active': selected === comp}" href="#">
-                {{comp.name}}
+              <a @click.prevent="selected = comp" v-for="(comp, idx) in components" :key="idx" class="list-group-item"
+                 :class="{'active': selected === comp}" href="#">
+                {{ getComponentName(comp) }}
               </a>
             </div>
           </Card>
         </div>
         <div class="col-12 col-sm-9">
-          <Card v-if="selected" :title="selected.name">
+          <Card v-if="selected" :title="selectedTitle">
             <component :is="selected"></component>
           </Card>
         </div>
@@ -31,22 +32,33 @@
 <script>
 import VueDraggable from './components/VueDraggable/VueDraggable.vue'
 import MultiselectDemo from './components/Multiselect/MultiselectDemo.vue'
-import PermissionDemo from './components/Permission/PermissionDemo'
+import PermittedDemo from './components/Permission/PermittedDemo'
 
 export default {
   name: 'App',
   data() {
     return {
       components: [
-        PermissionDemo,
+        PermittedDemo,
         MultiselectDemo,
         VueDraggable
       ],
       selected: null
     }
   },
+  computed: {
+    selectedTitle() {
+      return this.getComponentName(this.selected)
+    }
+  },
   mounted() {
     this.selected = this.components[0]
+  },
+  methods: {
+    getComponentName(component) {
+      if (!component) return ''
+      return component.name.replace(/(.+)Demo/, '$1')
+    }
   }
 }
 </script>

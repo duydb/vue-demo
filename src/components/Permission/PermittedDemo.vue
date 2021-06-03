@@ -135,7 +135,7 @@
 import Permitted from './Permitted.vue'
 
 export default {
-  name: 'PermittedDemo',
+  name: 'PermittedComponentDemo',
   components: {
     Permitted
   },
