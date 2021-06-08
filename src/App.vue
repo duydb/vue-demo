@@ -33,12 +33,14 @@
 import VueDraggable from './components/VueDraggable/VueDraggable.vue'
 import MultiselectDemo from './components/Multiselect/MultiselectDemo.vue'
 import PermittedDemo from './components/Permission/PermittedDemo'
+import UploadLargeFileDemo from './components/UploadLargeFile/UploadLargeFileDemo'
 
 export default {
   name: 'App',
   data() {
     return {
       components: [
+        UploadLargeFileDemo,
         PermittedDemo,
         MultiselectDemo,
         VueDraggable
