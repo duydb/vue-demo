@@ -22,7 +22,6 @@
         <h6>
           Number of chunk(s): {{ chunk.total }}
         </h6>
-<!--        <div>Uploading {{ chunk.uploadingItems.length }}/{{ chunk.total }}</div>-->
         <div class="progress mt-3">
           <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0"
                aria-valuemax="100"
@@ -49,19 +48,7 @@
         </tr>
         </tbody>
       </table>
-      <!--      <div v-for="item in chunk.items" :key="item.index" class="progress">-->
-      <!--        <div class="progress-bar" role="progressbar" :style="{width: item.loadingPercent + '%'}" aria-valuenow="100"-->
-      <!--             aria-valuemin="0" aria-valuemax="100"></div>-->
-      <!--      </div>-->
     </div>
-
-    <!--    <div class="mb-3">-->
-    <!--      <label for="formFile" class="form-label">Default file input example</label>-->
-    <!--      <input class="form-control" type="file" id="formFile">-->
-    <!--    </div>-->
-    <!--    <button @click.prevent="chooseFile" class="btn btn-primary"></button>-->
-    <!--    <input @change="onFileChanged" type="file" ref="file">-->
-    <!--    <h1>Upload Large File</h1>-->
   </div>
 </template>
 <script>
