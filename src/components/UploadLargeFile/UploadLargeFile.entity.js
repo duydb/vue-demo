@@ -13,10 +13,15 @@ export class ChunkContainerInfo {
 
   set total(value) {
     this._total = value
+    this._processIndex = 0
     this._items = []
     for (let i = 0; i < this._total; i++) {
       this._items.push(new ChunkItem(i))
     }
+  }
+
+  next() {
+    this._processIndex += 1
   }
 
   get items() {
@@ -35,6 +40,14 @@ export class ChunkContainerInfo {
   get loadingPercentStr() {
     return `${this.loadingPercent}%`
   }
+
+  get processItem() {
+    return this._items[this._processIndex]
+  }
+
+  get prevProcessItem() {
+    return this._items[this._processIndex - 1]
+  }
 }
 
 class ChunkItem {
@@ -42,6 +55,12 @@ class ChunkItem {
     this.index = index
     this.loading = false
     this.loadingPercent = 10
+    this.totalLines = 0
+    this.totalCharacter = 0
+    this.firstLine = ''
+    this.lastLine = ''
+    this.fixedFirstLine = ''
+    this.fixedLastLine = ''
   }
 
   get index() {

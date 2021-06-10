@@ -30,7 +30,7 @@ export default {
   components: { UploadLargeFile },
   data() {
     return {
-      chunkSize: 10000
+      chunkSize: 1000000
     }
   }
 }

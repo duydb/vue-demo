@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <PPMemory></PPMemory>
     <nav class="navbar navbar-light bg-light">
       <div class="container-fluid">
         <span class="navbar-brand mb-0 h1">
@@ -34,9 +35,13 @@ import VueDraggable from './components/VueDraggable/VueDraggable.vue'
 import MultiselectDemo from './components/Multiselect/MultiselectDemo.vue'
 import PermittedDemo from './components/Permission/PermittedDemo'
 import UploadLargeFileDemo from './components/UploadLargeFile/UploadLargeFileDemo'
+import PPMemory from './components/commons/PPMemory'
 
 export default {
   name: 'App',
+  components: {
+    PPMemory
+  },
   data() {
     return {
       components: [
