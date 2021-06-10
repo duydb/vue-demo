@@ -15,11 +15,8 @@
         </div>
       </div>
       <button @click.prevent="calculateFile" class="btn btn-primary text-nowrap ml-2" type="button">Calculate</button>
-      <button @click.prevent="readChunk" class="btn btn-primary text-nowrap ml-2" type="button">Read Chunk</button>
-      <button @click.prevent="reset" class="btn btn-outline-primary text-nowrap ml-2" type="button">Reset</button>
-    </div>
-    <div class="mt-3 border p-3">
-      <div ref="body"></div>
+<!--      <button @click.prevent="readChunk" class="btn btn-primary text-nowrap ml-2" type="button">Read Chunk</button>-->
+<!--      <button @click.prevent="reset" class="btn btn-outline-primary text-nowrap ml-2" type="button">Reset</button>-->
     </div>
     <div v-if="chunk.total > 0" class="mt-3">
       <div class="alert alert-primary" role="alert">
