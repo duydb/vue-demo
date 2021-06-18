@@ -6,9 +6,11 @@
           <slot name="header">
             <h5 class="modal-title">{{ title }}</h5>
           </slot>
-          <button @click.prevent="hide" aria-label="Close" class="close" type="button" v-if="!hideCloseBtn">
-            <span aria-hidden="true">&times;</span>
-          </button>
+          <slot name="header-action" :hide="hide">
+            <button @click.prevent="hide" aria-label="Close" class="close" type="button" v-if="!hideCloseBtn">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </slot>
         </div>
         <div :class="bodyClass" class="modal-body">
           <slot></slot>

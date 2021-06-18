@@ -1,93 +1,93 @@
 <template>
-  <div>
-    <Modal ref="modal" hide-footer class="modal-dark" :width="1030" backdrop="static" :keyboard="false">
+  <div class="di-theme">
+    <Modal ref="modal" hide-footer :width="1030" backdrop="static" :keyboard="false">
       <template slot="header">
         <div class="w-100 text-center">
           <h5 class="modal-title">{{ title }}</h5>
           <div class="text-muted">{{ desc }}</div>
         </div>
       </template>
-      <!--      <BrowseFile></BrowseFile>-->
-      <!--      <SelectTable></SelectTable>-->
-      <DescribeDatabase></DescribeDatabase>
+<!--      <BrowseFile></BrowseFile>-->
+      <SelectTable></SelectTable>
+<!--      <DescribeDatabase></DescribeDatabase>-->
     </Modal>
     <UploadData></UploadData>
   </div>
 </template>
 <script src="./DiUploadDocument.ctrl.js"></script>
 <style>
-.modal.modal-dark {
+.di-theme {
   line-height: 1.2;
   color: rgba(255, 255, 255, .8);
   font-size: 16px;
   letter-spacing: 0.2px;
 }
 
-.modal.modal-dark .table-container {
+.di-theme .table-container {
   border-radius: 4px;
   overflow: auto;
 }
 
-.modal.modal-dark table {
+.di-theme table {
   color: rgba(255, 255, 255, .8);
   border-radius: 4px;
   font-size: 12px;
   letter-spacing: 0.2px;
 }
 
-.modal.modal-dark .table th {
+.di-theme .table th {
   border: none;
   border-left: solid 1px rgba(255, 255, 255, 0.08);
   height: 46px;
   vertical-align: middle;
 }
 
-.modal.modal-dark .table td {
+.di-theme .table td {
   border: none;
   border-left: solid 1px rgba(255, 255, 255, 0.08);
   height: 48px;
   vertical-align: middle;
 }
 
-.modal.modal-dark .table tr td:first-child, .modal.modal-dark .table tr th:first-child {
+.di-theme .table tr td:first-child, .di-theme .table tr th:first-child {
   border-left: none;
 }
 
-.modal.modal-dark .table thead th {
+.di-theme .table thead th {
   border: none;
   border-left: solid 1px rgba(255, 255, 255, 0.08);
   background-color: #4a506a;
   border-top: 1px solid rgba(255, 255, 255, 0.08);
 }
 
-.modal.modal-dark .table thead tr:first-child th {
+.di-theme .table thead tr:first-child th {
   border-top: none;
 }
 
-.modal.modal-dark .table-striped tbody tr:nth-of-type(odd) {
+.di-theme .table-striped tbody tr:nth-of-type(odd) {
   background-color: #2b2e3a;
 }
 
-.modal.modal-dark .table-striped tbody tr:nth-of-type(even) {
+.di-theme .table-striped tbody tr:nth-of-type(even) {
   background-color: #2f3240;
 }
 
-.modal.modal-dark .table-striped tr:last-child td:first-child {
+.di-theme .table-striped tr:last-child td:first-child {
   border-bottom-left-radius: 6px;
 }
 
-.modal.modal-dark .dropdown-toggle {
+.di-theme .dropdown-toggle {
   display: flex;
   width: 100%;
   justify-content: space-between;
   align-items: center;
 }
 
-.modal.modal-dark a.dropdown-toggle {
+.di-theme a.dropdown-toggle {
   text-decoration: none;
 }
 
-.modal.modal-dark .dropdown-toggle:after {
+.di-theme .dropdown-toggle:after {
   background-image: url(/static/icons/ic-16-arrow-down.svg);
   background-size: 14px;
   background-position: center;
@@ -99,11 +99,11 @@
   margin-left: 4px;
 }
 
-.modal.modal-dark .dropdown-toggle[aria-expanded="true"]:after {
+.di-theme .dropdown-toggle[aria-expanded="true"]:after {
   transform: rotate(180deg);
 }
 
-.modal.modal-dark .dropdown-menu {
+.di-theme .dropdown-menu {
   background-color: #272a36;
   border-radius: 4px;
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.16), 0 4px 4px 0 rgba(0, 0, 0, 0.16);
@@ -111,19 +111,19 @@
   padding: 4px 0;
 }
 
-.modal.modal-dark .dropdown-menu .dropdown-item {
+.di-theme .dropdown-menu .dropdown-item {
   padding: 12px 16px;
 }
 
-.modal.modal-dark .dropdown-item:focus, .modal.modal-dark .dropdown-item:hover {
+.di-theme .dropdown-item:focus, .di-theme .dropdown-item:hover {
   background-color: #333646;
 }
 
-.modal.modal-dark .color-bi-primary {
+.di-theme .color-bi-primary {
   color: #597fff !important;
 }
 
-.modal.modal-dark .btn {
+.di-theme .btn {
   width: 192px;
   height: 42px;
   border-radius: 4px;
@@ -133,44 +133,44 @@
   padding: 0 16px;
 }
 
-.modal.modal-dark .btn.w-auto {
+.di-theme .btn.w-auto {
   min-width: 90px;
 }
 
-.modal.modal-dark .btn-bi-primary {
+.di-theme .btn-bi-primary {
   background-color: #597fff;
   color: #fff;
 }
 
-.modal.modal-dark .btn-bi-default {
+.di-theme .btn-bi-default {
   background-color: #333646;
   color: #fff;
 }
 
-.modal.modal-dark .btn-bi-transparent {
+.di-theme .btn-bi-transparent {
   color: #fff;
   background-color: transparent;
 }
 
-.modal.modal-dark .form-group-bi {
+.di-theme .form-group-bi {
   margin-bottom: 20px;
 }
 
-.modal.modal-dark .form-group label {
+.di-theme .form-group label {
   font-size: 14px;
   font-weight: 400;
   color: rgba(255, 255, 255, .8);
   margin-bottom: 16px;
 }
 
-.modal.modal-dark .form-group-bi label {
+.di-theme .form-group-bi label {
   font-size: 12px;
   color: #fff;
   font-weight: bold;
   margin-bottom: 16px;
 }
 
-.modal.modal-dark label.di-radio {
+.di-theme label.di-radio {
   margin-bottom: 0;
   font-size: 16px;
   font-weight: 400;
@@ -179,11 +179,11 @@
   align-items: center;
 }
 
-.modal.modal-dark .di-radio input[type=radio] {
+.di-theme .di-radio input[type=radio] {
   display: none;
 }
 
-.modal.modal-dark .di-radio input[type=radio] + span {
+.di-theme .di-radio input[type=radio] + span {
   display: inline-block;
   width: 16px;
   height: 16px;
@@ -192,11 +192,11 @@
   margin-right: 8px;
 }
 
-.modal.modal-dark .di-radio input[type=radio] + span + span {
+.di-theme .di-radio input[type=radio] + span + span {
   flex: 1;
 }
 
-.modal.modal-dark .di-radio input[type=radio] + span:before {
+.di-theme .di-radio input[type=radio] + span:before {
   content: '';
   display: inline-block;
   width: 16px;
@@ -208,11 +208,11 @@
   top: 0;
 }
 
-.modal.modal-dark .di-radio input[type=radio]:checked + span:before {
+.di-theme .di-radio input[type=radio]:checked + span:before {
   border-color: #597fff;
 }
 
-.modal.modal-dark .di-radio input[type=radio]:checked + span:after {
+.di-theme .di-radio input[type=radio]:checked + span:after {
   content: '';
   display: inline-block;
   width: 8px;
@@ -224,7 +224,7 @@
   background-color: #597fff;
 }
 
-.modal.modal-dark .form-control {
+.di-theme .form-control {
   background-color: #333646;
   color: #fff;
   border: none;
@@ -233,40 +233,40 @@
   font-weight: 400;
 }
 
-/*.modal.modal-dark .modal-dialog {*/
+/*.di-theme .modal-dialog {*/
 /*  max-width: 1030px;*/
 /*  width: calc(100vw - 30px);*/
 /*}*/
 
-.modal.modal-dark .modal-title {
+.di-theme .modal-title {
   font-size: 16px;
   font-weight: bold;
   line-height: 1.5;
   margin-bottom: 6px;
 }
 
-.modal.modal-dark .modal-desc {
+.di-theme .modal-desc {
   font-size: 14px;
   font-weight: 400;
   color: rgba(255, 255, 255, .6);
 }
 
-.modal.modal-dark .modal-dialog .modal-content {
+.di-theme .modal-dialog .modal-content {
   border-radius: 4px;
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.08);
   background-color: #272a36;
   color: rgba(255, 255, 255, .8);
 }
 
-.modal.modal-dark a[href] {
+.di-theme a[href] {
   color: #fff;
 }
 
-/*.modal.modal-dark a[href]:hover {*/
+/*.di-theme a[href]:hover {*/
 /*  color: #567afb;*/
 /*}*/
 
-.modal.modal-dark .close {
+.di-theme .close {
   color: #fff;
   text-shadow: none;
   padding: .5rem 1rem;
@@ -274,23 +274,57 @@
   right: 0;
   top: 0;
   margin: 0;
+  font-weight: 200;
+  font-size: 30px;
 }
 
-.modal.modal-dark .modal-dialog .modal-header {
+.di-theme .modal-dialog .modal-header {
   border: none;
   padding: 24px 24px 0;
   color: #fff;
 }
 
-.modal.modal-dark .modal-dialog .modal-footer {
+.di-theme .modal-dialog .modal-footer {
   border: none
 }
 
-.modal.modal-dark .text-muted {
+.di-theme .text-muted {
   color: rgba(255, 255, 255, .6) !important;
 }
 
-.modal.modal-dark .modal-body {
+.di-theme .modal-body {
   padding: 12px 24px 24px 24px;
+}
+.di-theme .progress-bi {
+  height: 8px;
+  border-radius: 0;
+}
+
+.di-theme .progress-bi .progress-bar {
+  background-color: #597fff;
+}
+
+.di-theme .close.minimize {
+  right: 40px;
+}
+
+.di-theme .upload-data-minimize {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+}
+
+.di-theme .upload-data-minimize a {
+  width: 100%;
+  padding: 0 10px;
+  background-color: #597fff;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  height: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
