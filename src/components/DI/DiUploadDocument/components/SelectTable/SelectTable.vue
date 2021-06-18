@@ -2,12 +2,12 @@
   <div>
     <div class="text-right mb-4">
       <a href="#" class="text-muted">
-        <img src="@/assets/icons/ic-16-edit.svg" alt="" width="16" height="16" class="mr-1">
+        <img src="/static/icons/ic-16-edit.svg" alt="" width="16" height="16" class="mr-1">
         Preview Selection
       </a>
     </div>
     <div class="row">
-      <div class="col-12 col-sm-7 col-md-8 col-lg-9">
+      <div class="col-12 col-sm-7 col-lg-8">
         <div class="table-container">
           <table class="table table-striped mb-0">
             <thead>
@@ -120,32 +120,31 @@
               <td>20/10/2010 at 04:10 AM</td>
               <td>93,291,255.2</td>
             </tr>
-            <tr>
-              <td>1</td>
-              <td>Beverages</td>
-              <td>Korea</td>
-              <td>20/10/2010 at 04:10 AM</td>
-              <td>93,291,255.2</td>
-            </tr>
             </tbody>
           </table>
         </div>
       </div>
-      <div class="col-12 col-sm-5 col-md-4 col-lg-3">
+      <div class="col-12 col-sm-5 col-lg-4">
         <div class="form-group form-group-bi">
           <label>Column Headers</label>
-          <div class="custom-control custom-radio">
-            <input type="radio" id="customRadioInline1" name="customRadioInline1" class="custom-control-input">
-            <label class="custom-control-label" for="customRadioInline1">User first row as headers</label>
-            <i class="float-right">
-              <img src="@/assets/icons/question.svg" alt="" width="16" height="16">
+          <div class="d-flex align-items-center mb-3">
+            <label class="di-radio">
+              <input type="radio" name="header">
+              <span></span>
+              <span>User first row as headers</span>
+            </label>
+            <i class="ml-auto">
+              <img src="/static/icons/question.svg" alt="" width="16" height="16">
             </i>
           </div>
-          <div class="custom-control custom-radio">
-            <input type="radio" id="customRadioInline2" name="customRadioInline1" class="custom-control-input">
-            <label class="custom-control-label" for="customRadioInline2">Generate headers</label>
-            <i class="float-right">
-              <img src="@/assets/icons/question.svg" alt="" width="16" height="16">
+          <div class="d-flex align-items-center">
+            <label class="di-radio">
+              <input type="radio" name="header">
+              <span></span>
+              <span>Generate headers</span>
+            </label>
+            <i class="ml-auto">
+              <img src="/static/icons/question.svg" alt="" width="16" height="16">
             </i>
           </div>
         </div>
@@ -163,7 +162,7 @@
               </div>
             </div>
             <i class="ml-auto">
-              <img src="@/assets/icons/question.svg" alt="" width="16" height="16">
+              <img src="/static/icons/question.svg" alt="" width="16" height="16">
             </i>
           </div>
         </div>
@@ -171,16 +170,28 @@
           <label class="w-100 d-flex align-items-center">
             <span>Metadata</span>
             <i class="ml-auto">
-              <img src="@/assets/icons/question.svg" alt="" width="16" height="16">
+              <img src="/static/icons/question.svg" alt="" width="16" height="16">
             </i>
           </label>
-          <div class="custom-control custom-radio">
-            <input type="radio" id="customRadioInline3" name="customRadioInline2" class="custom-control-input">
-            <label class="custom-control-label" for="customRadioInline3">Include batch upload metadata</label>
+          <div class="d-flex align-items-center mb-3">
+            <label class="di-radio">
+              <input type="radio" name="Metadata">
+              <span></span>
+              <span>Include batch upload metadata</span>
+            </label>
+            <i class="ml-auto">
+              <img src="/static/icons/question.svg" alt="" width="16" height="16">
+            </i>
           </div>
-          <div class="custom-control custom-radio">
-            <input type="radio" id="customRadioInline4" name="customRadioInline2" class="custom-control-input">
-            <label class="custom-control-label" for="customRadioInline4">Don’t include batch upload metadata</label>
+          <div class="d-flex align-items-center">
+            <label class="di-radio">
+              <input type="radio" name="Metadata">
+              <span></span>
+              <span>Don’t include batch upload metadata</span>
+            </label>
+            <i class="ml-auto">
+              <img src="/static/icons/question.svg" alt="" width="16" height="16">
+            </i>
           </div>
         </div>
         <div class="form-group form-group-bi">

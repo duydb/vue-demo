@@ -1,23 +1,25 @@
 <template>
   <div>
-    <Modal ref="modal" hide-footer class="modal-dark" open backdrop="static" :keyboard="false">
+    <Modal ref="modal" hide-footer class="modal-dark" :width="1030" backdrop="static" :keyboard="false">
       <template slot="header">
         <div class="w-100 text-center">
-          <h5>{{ title }}</h5>
+          <h5 class="modal-title">{{ title }}</h5>
           <div class="text-muted">{{ desc }}</div>
         </div>
       </template>
       <!--      <BrowseFile></BrowseFile>-->
-      <SelectTable></SelectTable>
+      <!--      <SelectTable></SelectTable>-->
+      <DescribeDatabase></DescribeDatabase>
     </Modal>
+    <UploadData></UploadData>
   </div>
 </template>
 <script src="./DiUploadDocument.ctrl.js"></script>
 <style>
 .modal.modal-dark {
   line-height: 1.2;
-  color: #e6e6e8;
-  font-size: 14px;
+  color: rgba(255, 255, 255, .8);
+  font-size: 16px;
   letter-spacing: 0.2px;
 }
 
@@ -27,15 +29,24 @@
 }
 
 .modal.modal-dark table {
-  color: #e6e6e8;
+  color: rgba(255, 255, 255, .8);
   border-radius: 4px;
   font-size: 12px;
   letter-spacing: 0.2px;
 }
 
-.modal.modal-dark .table td, .modal.modal-dark .table th {
+.modal.modal-dark .table th {
   border: none;
   border-left: solid 1px rgba(255, 255, 255, 0.08);
+  height: 46px;
+  vertical-align: middle;
+}
+
+.modal.modal-dark .table td {
+  border: none;
+  border-left: solid 1px rgba(255, 255, 255, 0.08);
+  height: 48px;
+  vertical-align: middle;
 }
 
 .modal.modal-dark .table tr td:first-child, .modal.modal-dark .table tr th:first-child {
@@ -85,7 +96,7 @@
   height: 16px;
   border: none;
   transition: transform .2s ease-in-out;
-  margin-left: 20px;
+  margin-left: 4px;
 }
 
 .modal.modal-dark .dropdown-toggle[aria-expanded="true"]:after {
@@ -106,6 +117,10 @@
 
 .modal.modal-dark .dropdown-item:focus, .modal.modal-dark .dropdown-item:hover {
   background-color: #333646;
+}
+
+.modal.modal-dark .color-bi-primary {
+  color: #597fff !important;
 }
 
 .modal.modal-dark .btn {
@@ -138,6 +153,13 @@
 }
 
 .modal.modal-dark .form-group-bi {
+  margin-bottom: 20px;
+}
+
+.modal.modal-dark .form-group label {
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, .8);
   margin-bottom: 16px;
 }
 
@@ -146,6 +168,60 @@
   color: #fff;
   font-weight: bold;
   margin-bottom: 16px;
+}
+
+.modal.modal-dark label.di-radio {
+  margin-bottom: 0;
+  font-size: 16px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, .8);
+  display: flex;
+  align-items: center;
+}
+
+.modal.modal-dark .di-radio input[type=radio] {
+  display: none;
+}
+
+.modal.modal-dark .di-radio input[type=radio] + span {
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  position: relative;
+  vertical-align: middle;
+  margin-right: 8px;
+}
+
+.modal.modal-dark .di-radio input[type=radio] + span + span {
+  flex: 1;
+}
+
+.modal.modal-dark .di-radio input[type=radio] + span:before {
+  content: '';
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  border: solid 2px rgba(255, 255, 255, .6);
+  border-radius: 50%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.modal.modal-dark .di-radio input[type=radio]:checked + span:before {
+  border-color: #597fff;
+}
+
+.modal.modal-dark .di-radio input[type=radio]:checked + span:after {
+  content: '';
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  position: absolute;
+  left: 4px;
+  top: 4px;
+  background-color: #597fff;
 }
 
 .modal.modal-dark .form-control {
@@ -157,16 +233,29 @@
   font-weight: 400;
 }
 
-.modal.modal-dark .modal-dialog {
-  max-width: 1030px;
-  width: calc(100vw - 30px);
+/*.modal.modal-dark .modal-dialog {*/
+/*  max-width: 1030px;*/
+/*  width: calc(100vw - 30px);*/
+/*}*/
+
+.modal.modal-dark .modal-title {
+  font-size: 16px;
+  font-weight: bold;
+  line-height: 1.5;
+  margin-bottom: 6px;
+}
+
+.modal.modal-dark .modal-desc {
+  font-size: 14px;
+  font-weight: 400;
+  color: rgba(255, 255, 255, .6);
 }
 
 .modal.modal-dark .modal-dialog .modal-content {
   border-radius: 4px;
   box-shadow: 0 2px 8px 0 rgba(0, 0, 0, 0.08);
   background-color: #272a36;
-  color: #e6e6e8;
+  color: rgba(255, 255, 255, .8);
 }
 
 .modal.modal-dark a[href] {
@@ -204,26 +293,4 @@
 .modal.modal-dark .modal-body {
   padding: 12px 24px 24px 24px;
 }
-</style>
-<style>
-.upload-container {
-  border-radius: 4px;
-  border: 2px dashed #484a54;
-  width: 100%;
-  height: 400px;
-  overflow: hidden;
-}
-
-.upload-container .upload-body {
-  background-color: #2d313c;
-}
-
-.upload-container.dragover {
-  border-color: #567afb;
-}
-
-.upload-container.dragover .upload-body {
-  background-color: #2d313c;
-}
-
 </style>

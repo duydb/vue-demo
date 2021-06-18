@@ -1,6 +1,6 @@
 <template>
   <div class="modal fade" role="dialog">
-    <div :class="sizeClass" :style="{ width }" class="modal-dialog">
+    <div :class="sizeClass" :style="customWidthStyle" class="modal-dialog">
       <div class="modal-content">
         <div :class="headerClass" class="modal-header" v-if="!hideHeader">
           <slot name="header">
@@ -82,7 +82,7 @@ export default {
       default: ''
     },
     width: {
-      type: String
+      type: Number
     }
   },
   data() {
@@ -93,6 +93,15 @@ export default {
   computed: {
     sizeClass() {
       return `modal-${this.size} ${this.modalClass}`
+    },
+    customWidthStyle() {
+      if (this.width > 0) {
+        return {
+          width: '100%',
+          maxWidth: this.width + 'px'
+        }
+      }
+      return {}
     }
   },
   watch: {
