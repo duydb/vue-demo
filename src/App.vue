@@ -36,6 +36,7 @@ import MultiselectDemo from './components/Multiselect/MultiselectDemo.vue'
 import PermittedDemo from './components/Permission/PermittedDemo'
 import UploadLargeFileDemo from './components/UploadLargeFile/UploadLargeFileDemo'
 import PPMemory from './components/commons/PPMemory'
+import DiUploadDocumentDemo from './components/DI/DiUploadDocument/DiUploadDocument.demo.vue'
 
 export default {
   name: 'App',
@@ -45,6 +46,7 @@ export default {
   data() {
     return {
       components: [
+        DiUploadDocumentDemo,
         UploadLargeFileDemo,
         PermittedDemo,
         MultiselectDemo,
@@ -69,3 +71,9 @@ export default {
   }
 }
 </script>
+<style>
+body {
+  font-family: 'Barlow', sans-serif;
+  font-weight: 300;
+}
+</style>
