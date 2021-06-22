@@ -8,12 +8,12 @@
       <img class="mx-auto mb-4" src="/static/icons/upload@3x.png" alt="Upload Icon" width="40" height="40">
       <div>DRAG AND DROP FILE</div>
       <div>Drop a document or</div>
-      <a @click.prevent="browserLocalFiles" href="#" class="color-bi-primary">browse your files</a>
-      <div>(CSV, XLS, or XLSX)</div>
+      <a @click.prevent="browserLocalFiles" href="#" class="color-bi-primary">browse your CSV files</a>
+      <!--      <div>(CSV)</div>-->
     </div>
   </div>
 </template>
-<script src="./BrowseFile.ctrl.js"></script>
+<script src="./BrowseFiles.ctrl.js"></script>
 
 <style>
 .upload-container {
@@ -27,13 +27,16 @@
 
 .upload-container .upload-body {
   background-color: #2d313c;
+  text-decoration: none;
 }
 
+/*.upload-container:hover, */
 .upload-container.dragover {
   border-color: #567afb;
 }
 
+/*.upload-container:hover .upload-body,*/
 .upload-container.dragover .upload-body {
-  background-color: #2d313c;
+  background-color: rgba(86, 122, 251, 0.11);
 }
 </style>

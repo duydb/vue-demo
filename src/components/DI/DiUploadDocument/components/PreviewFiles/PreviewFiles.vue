@@ -219,3 +219,4 @@
     </div>
   </div>
 </template>
+<script src="./PreviewFiles.ctrl.js"></script>

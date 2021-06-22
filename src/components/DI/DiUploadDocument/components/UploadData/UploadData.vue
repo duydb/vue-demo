@@ -5,7 +5,7 @@
         Uploading... (78%)
       </a>
     </div>
-    <Modal ref="modal" hide-footer backdrop="static" :keyboard="false" :width="610" open>
+    <Modal ref="modal" hide-footer backdrop="static" :keyboard="false" :width="610">
       <template slot="header-action" slot-scope="{hide}">
         <button @click.prevent="minimize" aria-label="Close" class="close minimize" type="button">
           <span aria-hidden="true">-</span>

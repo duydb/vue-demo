@@ -1,5 +1,8 @@
+import { DIUploadDocumentInfo } from '../../DiUploadDocument.entity'
+import DiUploadDocumentStageMixin from '../DiUploadDocumentStage.mixin.js'
 export default {
-  name: 'BrowseFile',
+  name: 'BrowseFiles',
+  mixins: [DiUploadDocumentStageMixin],
   data() {
     return {
       isDragOver: false,
@@ -36,16 +39,13 @@ export default {
         }
       }
       this.files = files
-      this.files.forEach((file, i) => console.log('... file[' + i + '].name = ' + file.name))
-      // console.log('onDrop', e)
     },
     onChangeFile(e) {
-      this.file = e.target.files[0]
+      const files = []
       for (let i = 0; i < e.target.files.length; i++) {
-        this.files.push(e.target.files[0])
+        files.push(e.target.files[0])
       }
-      console.log(e.target.files[0])
-      this.files.forEach((file, i) => console.log('... file[' + i + '].name = ' + file.name))
+      this.files = files
     },
     onDragOver(e) {
       this.isDragOver = true
@@ -58,6 +58,18 @@ export default {
     browserLocalFiles() {
       this.$refs.file.value = null
       this.$refs.file.click()
+    }
+  },
+  watch: {
+    files() {
+      if (this.files.length > 1) {
+        alert('Please drag only one file. Let\'s try again!')
+        this.files = []
+      } else if (this.value) {
+        this.value.files = this.files
+        this.value.next()
+      }
+      this.files.forEach((file, i) => console.log('... file[' + i + '].name = ' + file.name))
     }
   }
 }
