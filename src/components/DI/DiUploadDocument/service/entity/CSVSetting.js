@@ -4,9 +4,11 @@ export class CSVSetting extends deneric.Entity {
   constructor(data) {
     super(data, {
       'include_header': ['include_header', deneric.Boolean],
-      'delimiter': ['delimiter', deneric.String],
+      'delimiter': ['delimiter', deneric.String, ','],
       'quote': ['quote', deneric.String],
-      'add_batch_info': ['add_batch_info', deneric.Boolean]
+      'add_batch_info': ['add_batch_info', deneric.Boolean],
+      'encoding': ['encoding', deneric.String, 'UTF-8'],
+      'chunkSize': ['chunkSize', deneric.Number, 10000]
     })
   }
 }

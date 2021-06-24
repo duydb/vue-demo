@@ -2,19 +2,34 @@
   line-height: 1.2;
   color: rgba(255, 255, 255, .8);
   font-size: 16px;
-  letter-spacing: 0.2px;
+  /*letter-spacing: 0.2px;*/
 }
 
 .di-theme .table-container {
   border-radius: 4px;
   overflow: auto;
+  position: relative;
+
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.di-theme .table-container::-webkit-scrollbar {
+  display: none;
 }
 
 .di-theme table {
   color: rgba(255, 255, 255, .8);
   border-radius: 4px;
   font-size: 12px;
-  letter-spacing: 0.2px;
+  /*letter-spacing: 0.2px;*/
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+.di-theme table thead{
+  position: sticky;
+  top: 0;
 }
 
 .di-theme .table th {
@@ -277,6 +292,7 @@
 .di-theme .modal-body {
   padding: 12px 24px 24px 24px;
 }
+
 .di-theme .progress-bi {
   height: 8px;
   border-radius: 0;

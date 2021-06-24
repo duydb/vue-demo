@@ -6,7 +6,8 @@
           <div class="form-group">
             <label>Select or create new database</label>
             <div class="dropdown">
-              <a href="#" class="btn btn-bi-default w-auto dropdown-toggle" data-toggle="dropdown">Select database...</a>
+              <a href="#" class="btn btn-bi-default w-auto dropdown-toggle"
+                 data-toggle="dropdown">Select database...</a>
               <div class="dropdown-menu w-100">
                 <a href="#" class="dropdown-item">Create new database</a>
                 <a href="#" class="dropdown-item">Database 1</a>
@@ -36,8 +37,8 @@
     </div>
     <div class="row">
       <div class="col-12 text-right">
-        <button class="btn btn-bi-transparent">Back</button>
-        <button class="btn btn-bi-primary">Import</button>
+        <button @click.prevent="back" class="btn btn-bi-transparent">Back</button>
+        <button @click.prevent="next" class="btn btn-bi-primary">Next</button>
       </div>
     </div>
   </div>
@@ -52,3 +53,4 @@
   border-radius: 4px;
 }
 </style>
+<script src="./DescribeDatabase.ctrl.js"></script>
