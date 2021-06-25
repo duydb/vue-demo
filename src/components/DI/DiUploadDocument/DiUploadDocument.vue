@@ -7,7 +7,7 @@
           <div class="text-muted">{{ desc }}</div>
         </div>
       </template>
-      <component v-if="bodyComponent" :is="bodyComponent" :value="model"></component>
+      <component v-if="bodyComponent" :is="bodyComponent" :value="model" :setting="setting"></component>
 <!--      <BrowseFile></BrowseFile>-->
 <!--      <SelectTable></SelectTable>-->
 <!--      <DescribeDatabase></DescribeDatabase>-->

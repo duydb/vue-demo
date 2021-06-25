@@ -23,6 +23,7 @@ export class DIUploadDocumentInfo {
   constructor(stage) {
     this.stage = stage || DI_UPLOAD_DOC_STAGE.browse_file
     this.files = []
+    this.chunkContainer = null
   }
 
   title() {

@@ -6,14 +6,13 @@
           <div class="form-group">
             <label>Select or create new database</label>
             <div class="dropdown">
-              <a href="#" class="btn btn-bi-default w-auto dropdown-toggle"
-                 data-toggle="dropdown">Select database...</a>
+              <a href="#" class="btn btn-bi-default w-auto dropdown-toggle" data-toggle="dropdown">
+                <span v-if="database.model">{{database.model.display_name}}</span>
+                <span v-else>Select database...</span>
+              </a>
               <div class="dropdown-menu w-100">
                 <a href="#" class="dropdown-item">Create new database</a>
-                <a href="#" class="dropdown-item">Database 1</a>
-                <a href="#" class="dropdown-item">Database 2</a>
-                <a href="#" class="dropdown-item">Database 3</a>
-                <a href="#" class="dropdown-item">Database 4</a>
+                <a @click.prevent="selectDatabase(db)" v-for="db in database.items" :key="db.name" href="#" class="dropdown-item">{{db.display_name}}</a>
               </div>
             </div>
             <input type="text" class="form-control mt-3" placeholder="Input name new database">
@@ -21,13 +20,13 @@
           <div class="form-group">
             <label>Select or create new table</label>
             <div class="dropdown">
-              <a href="#" class="btn btn-bi-default w-auto dropdown-toggle" data-toggle="dropdown">Select table...</a>
+              <a href="#" class="btn btn-bi-default w-auto dropdown-toggle" data-toggle="dropdown">
+                <span v-if="table.model">{{table.model.name}}</span>
+                <span v-else>Select table...</span>
+              </a>
               <div class="dropdown-menu w-100">
                 <a href="#" class="dropdown-item">Create new table</a>
-                <a href="#" class="dropdown-item">Table 1</a>
-                <a href="#" class="dropdown-item">Table 2</a>
-                <a href="#" class="dropdown-item">Table 3</a>
-                <a href="#" class="dropdown-item">Table 4</a>
+                <a @click.prevent="selectTable(tb)" v-for="tb in table.items" :key="tb.name" href="#" class="dropdown-item">{{tb.name}}</a>
               </div>
             </div>
             <input type="text" class="form-control mt-3" placeholder="Input name new database">
@@ -38,7 +37,7 @@
     <div class="row">
       <div class="col-12 text-right">
         <button @click.prevent="back" class="btn btn-bi-transparent">Back</button>
-        <button @click.prevent="next" class="btn btn-bi-primary">Next</button>
+        <button @click.prevent="register" class="btn btn-bi-primary">Next</button>
       </div>
     </div>
   </div>

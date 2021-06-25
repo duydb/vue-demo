@@ -1,16 +1,19 @@
 import { DIUploadDocumentInfo } from '../DiUploadDocument.entity'
 import { CSVSetting } from '../service/entity/CSVSetting'
 import DocumentService from '../service/DocumentService'
+import { ChunkContainerInfo } from '../service/entity/ChunkContainerInfo'
 
 export default {
   props: {
-    value: DIUploadDocumentInfo
+    value: DIUploadDocumentInfo,
+    // chunkContainer: ChunkContainerInfo,
+    setting: CSVSetting
   },
   data() {
     return {
-      loading: false,
-      chunkContainer: null,
-      setting: new CSVSetting()
+      loading: false
+      // chunkContainer: null,
+      // setting: new CSVSetting()
     }
   },
   methods: {
@@ -20,14 +23,24 @@ export default {
     back() {
       this.value.back()
     },
-    async initChunkContainer() {
-      this.loading = true
-      this.chunkContainer = DocumentService.initChunkContainer(this.value.files[0], this.setting.chunkSize)
-      await DocumentService.readChunk(this.value.files[0], this.chunkContainer, this.setting.chunkSize, this.setting.encoding)
-      this.loading = false
 
-      this.calcPreviewData()
-      console.log(this.chunkContainer)
-    }
+    // calcPreviewData(chunkContainer) {
+    //   const previewLines = chunkContainer.prevProcessItem.lines.slice(0, 10).map(line => line.split(this.setting.delimiter))
+    //   if (this.setting.include_header) {
+    //     this.previewData.headers = previewLines[0].map((name, key) => ({
+    //       name,
+    //       key,
+    //       type: 'String'
+    //     }))
+    //     this.previewData.body = previewLines.slice(1)
+    //   } else {
+    //     this.previewData.headers = previewLines[0].map((name, key) => ({
+    //       name: `Column ${key + 1}`,
+    //       key,
+    //       type: 'String'
+    //     }))
+    //     this.previewData.body = previewLines
+    //   }
+    // }
   }
 }

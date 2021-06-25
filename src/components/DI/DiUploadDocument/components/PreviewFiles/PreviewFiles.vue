@@ -6,7 +6,7 @@
         Preview Selection
       </a>
     </div>
-    <div v-if="chunkContainer" class="row">
+    <div v-if="value.chunkContainer" class="row">
       <div class="col-12 col-sm-7 col-lg-8">
         <div class="table-container" style="max-height: 500px">
           <table class="table table-striped mb-0">
@@ -127,7 +127,7 @@
           <label>Column Headers</label>
           <div class="d-flex align-items-center mb-3">
             <label class="di-radio">
-              <input v-model="setting.include_header" @input="calcPreviewData" :value="true" type="radio" name="header">
+              <input v-model="setting.include_header" @change="calcPreviewData" :value="true" type="radio" name="header">
               <span></span>
               <span>User first row as headers</span>
             </label>
@@ -137,7 +137,7 @@
           </div>
           <div class="d-flex align-items-center">
             <label class="di-radio">
-              <input v-model="setting.include_header" @input="calcPreviewData" :value="false" type="radio" name="header">
+              <input v-model="setting.include_header" @change="calcPreviewData" :value="false" type="radio" name="header">
               <span></span>
               <span>Generate headers</span>
             </label>

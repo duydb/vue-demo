@@ -68,6 +68,7 @@ export default {
       } else if (this.value) {
         this.value.files = this.files
         this.value.next()
+        // this.initChunkContainer()
       }
       this.files.forEach((file, i) => console.log('... file[' + i + '].name = ' + file.name))
     }

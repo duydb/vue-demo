@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const Http = axios.create({
-  baseURL: 'https://dev.datainsider.co/api/ingestion',
+  baseURL: 'http://dev.datainsider.co/api',
   headers: {'DI-SERVICE-KEY': '12345678'}
 })
 

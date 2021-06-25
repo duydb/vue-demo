@@ -1,5 +1,6 @@
 import UploadData from './components/UploadData/UploadData.vue'
 import { DI_UPLOAD_DOC_STAGE, DIUploadDocumentInfo } from './DiUploadDocument.entity'
+import { CSVSetting } from './service/entity/CSVSetting'
 
 const BrowseFiles = () => import('./components/BrowseFiles/BrowseFiles.vue')
 const PreviewFiles = () => import('./components/PreviewFiles/PreviewFiles.vue')
@@ -10,7 +11,9 @@ export default {
   components: { UploadData },
   data() {
     return {
-      model: null
+      model: null,
+      chunkContainer: null,
+      setting: new CSVSetting()
     }
   },
   computed: {
@@ -37,7 +40,7 @@ export default {
   methods: {
     reset() {
     },
-    initModel(){
+    initModel() {
       if (!this.model) {
         this.model = new DIUploadDocumentInfo()
       }

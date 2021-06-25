@@ -106,6 +106,9 @@
   box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.16), 0 4px 4px 0 rgba(0, 0, 0, 0.16);
   font-size: 14px;
   padding: 4px 0;
+
+  max-height: 300px;
+  overflow: auto;
 }
 
 .di-theme .dropdown-menu .dropdown-item {
