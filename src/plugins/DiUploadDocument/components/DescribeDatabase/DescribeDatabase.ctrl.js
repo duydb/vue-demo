@@ -1,11 +1,11 @@
-import { DIUploadDocumentInfo } from '../../DiUploadDocument.entity'
-import DiUploadDocumentStageMixin from '../DiUploadDocumentStage.mixin'
-import SchemaService from '../../service/SchemaService'
-import UploadDocumentService from '../../service/UploadDocumentService'
+import SchemaService from '../../services/SchemaService'
+import UploadDocumentService from '../../services/UploadDocumentService'
+import UploadDocumentStageMixin from '../../mixins/UploadDocumentStage.mixin'
+import { Database } from '../../entities/DocumentSchema'
 
 export default {
   name: 'PreviewFile',
-  mixins: [DiUploadDocumentStageMixin],
+  mixins: [UploadDocumentStageMixin],
   data() {
     return {
       database: {
@@ -42,6 +42,8 @@ export default {
     selectNewDatabaseOption() {
       this.database.createNew = true
       this.table.items = []
+      this.table.model = null
+      this.table.createNew = true
       this.$nextTick(() => {
         this.$refs.newDatabase.focus()
       })
@@ -83,9 +85,14 @@ export default {
         this.database.mapDetail[databaseName] = resp.data
       }
     },
-    getTargetDatabase() {
+    async getTargetDatabase() {
       if (this.database.createNew) {
-        return { name: this.database.createNewModel }
+        const newDB = new Database({
+          name: this.makeNameFromDisplayName(this.database.createNewModel),
+          display_name: this.database.createNewModel
+        })
+        const resp = await SchemaService.createDatabase(newDB.serialize)
+        return { name: resp.data.name }
       } else if (this.database.model) {
         return this.database.model
       }
@@ -128,7 +135,7 @@ export default {
         'file_name': this.value.files[0].name,
         'batch_size': this.value.chunkContainer.total,
         'schema': this.value.schema.serialize,
-        'csv_setting': this.setting.serialize
+        'csv_setting': this.value.setting.serialize
       }).then(resp => {
         this.value.register = resp.data
         this.value.next()

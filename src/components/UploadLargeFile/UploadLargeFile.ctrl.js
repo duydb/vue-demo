@@ -1,5 +1,6 @@
 import { ChunkContainerInfo } from './UploadLargeFile.entity'
 import { fileSize, numberFixed } from '@/misc/Utils'
+import DocumentService from '../DI/DiUploadDocument/service/DocumentService'
 
 export default {
   name: 'UploadLargeFile',
@@ -39,7 +40,7 @@ export default {
       this.uploading = false
       this.chunk = new ChunkContainerInfo()
     },
-    calculateFile() {
+    async calculateFile() {
       if (!this.file) {
         alert('Please choose file to upload')
         return
@@ -50,50 +51,55 @@ export default {
       }
       // this.uploading = true
       this.chunk.total = Math.ceil(this.file.size / this.chunkSize)
-      this.chunk.items.forEach(this.readChunk)
+      for (const item of this.chunk.items) {
+        console.log(item, item === this.chunk.processItem)
+        console.log(this.chunk._processIndex)
+        await DocumentService.readChunk(this.file, this.chunk, this.chunkSize, this.encoding)
+      }
       console.log(this.chunk)
     },
-    readChunk() {
-      if (this.chunk.total <= 0) {
-        alert('Please choose file to upload')
-        return
-      }
-      if (!this.chunk.processItem) {
-        alert('All done')
-        return
-      }
-      const chunkIndex = this.chunk.processItem.index
-
-      var reader = new FileReader()
-      reader.onload = (e) => {
-        console.log('end read file', e)
-        const content = e.target.result
-        const lines = content.split(/\r?\n|\r/)
-        const totalLines = lines.length
-        const totalCharacter = content.length
-        const lastLine = lines[totalLines - 1]
-        console.log([lastLine])
-        this.chunk.processItem.totalLines = totalLines
-        this.chunk.processItem.totalCharacter = totalCharacter
-        this.chunk.processItem.firstLine = lines[0]
-        this.chunk.processItem.lastLine = lines[totalLines - 1]
-
-        if (this.chunk.prevProcessItem) {
-          this.chunk.processItem.fixedFirstLine = [(this.chunk.prevProcessItem.lastLine || ''), this.chunk.processItem.firstLine].join('')
-          this.chunk.processItem.fixedLastLine = ''
-        } else {
-          this.chunk.processItem.fixedFirstLine = this.chunk.processItem.firstLine
-          this.chunk.processItem.fixedLastLine = ''
-        }
-
-        this.chunk.next()
-        // this.$refs.body.innerHTML = `<h1>totalLines= ${totalLines} | totalCharacter = ${totalCharacter}</h1><h2>First Line: </h2><div>${lines[0]}</div><h2>Last Line: </h2><div>${lastLine}</div>`
-      }
-    // .slice(0, 10 * 1024 * 1024)
-      const startFrom = chunkIndex * this.chunkSize
-      reader.readAsText(this.file.slice(startFrom, startFrom + this.chunkSize), this.encoding)
-      console.log('start read file')
-    },
+    // readChunk() {
+    //   if (this.chunk.total <= 0) {
+    //     alert('Please choose file to upload')
+    //     return
+    //   }
+    //   if (!this.chunk.processItem) {
+    //     alert('All done')
+    //     return
+    //   }
+    //   const chunkIndex = this.chunk.processItem.index
+    //
+    //   var reader = new FileReader()
+    //   reader.onload = (e) => {
+    //     console.log('end read file', e)
+    //     const content = e.target.result
+    //     const lines = content.split(/\r?\n|\r/)
+    //     const totalLines = lines.length
+    //     const totalCharacter = content.length
+    //     const lastLine = lines[totalLines - 1]
+    //     console.log([lastLine])
+    //     this.chunk.processItem.totalLines = totalLines
+    //     this.chunk.processItem.totalCharacter = totalCharacter
+    //     this.chunk.processItem.firstLine = lines[0]
+    //     this.chunk.processItem.lastLine = lines[totalLines - 1]
+    //
+    //     if (this.chunk.prevProcessItem) {
+    //       this.chunk.processItem.fixedFirstLine = [(this.chunk.prevProcessItem.lastLine || ''), this.chunk.processItem.firstLine].join('')
+    //       this.chunk.processItem.fixedLastLine = ''
+    //     } else {
+    //       this.chunk.processItem.fixedFirstLine = this.chunk.processItem.firstLine
+    //       this.chunk.processItem.fixedLastLine = ''
+    //     }
+    //
+    //     this.chunk.next()
+    //     console.log()
+    //     // this.$refs.body.innerHTML = `<h1>totalLines= ${totalLines} | totalCharacter = ${totalCharacter}</h1><h2>First Line: </h2><div>${lines[0]}</div><h2>Last Line: </h2><div>${lastLine}</div>`
+    //   }
+    // // .slice(0, 10 * 1024 * 1024)
+    //   const startFrom = chunkIndex * this.chunkSize
+    //   reader.readAsText(this.file.slice(startFrom, startFrom + this.chunkSize), this.encoding)
+    //   console.log('start read file')
+    // },
     // validateContent(content) {
     //   const lines = content.split(/\r?\n|\r/)
     //   const totalLines = lines.length

@@ -14,12 +14,9 @@ export default {
   register(data) {
     return Http.post('/ingestion/csv/register', data)
   },
-  upload() {
-    return Http.post('/ingestion/csv/upload', {
-      'csv_id': 'baby_names.csv',
-      'batch_number': 0,
-      'data': '2007,ZOEY,KINGS,F,11\n2007,ZOEY,SUFFOLK,F,6\n2007,ZOEY,MONROE,F,6\n2007,ZOEY,ERIE,F,9\n2007,ZOE,ULSTER,F,5\n2007,ZOE,WESTCHESTER,F,24\n2007,ZOE,BRONX,F,13\n2007,ZOE,NEW YORK,F,55\n2007,ZOE,NASSAU,F,15\n2007,ZOE,ERIE,F,6',
-      'is_end': true
+  upload(data, onUploadProgress) {
+    return Http.post('/ingestion/csv/upload', data, {
+      onUploadProgress
     })
   }
 }

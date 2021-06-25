@@ -13,19 +13,18 @@
             <thead>
             <tr>
               <th class="text-center">Name</th>
-              <th v-for="header in previewData.headers" :key="header.key">{{ header.name }}</th>
+              <th v-for="header in value.schema.columns" :key="header.key">
+                <span v-if="setting.include_header">{{ header.display_name }}</span>
+                <input v-else v-model="header.display_name" type="text" class="bg-transparent border-0 text-white">
+              </th>
             </tr>
             <tr>
               <th class="text-center">Type</th>
-              <th v-for="header in previewData.headers" :key="header.key">
+              <th v-for="column in value.schema.columns" :key="column.name">
                 <div class="dropdown dropdown-th">
-                  <a href="#" class="text-white font-weight-normal dropdown-toggle" data-toggle="dropdown">{{ header.type }}</a>
+                  <a href="#" class="text-white font-weight-normal dropdown-toggle" data-toggle="dropdown">{{ column.class_name }}</a>
                   <div class="dropdown-menu">
-                    <a href="#" class="dropdown-item">String</a>
-                    <a href="#" class="dropdown-item">Integer</a>
-                    <a href="#" class="dropdown-item">Long</a>
-                    <a href="#" class="dropdown-item">Date</a>
-                    <a href="#" class="dropdown-item">Boolean</a>
+                    <a @click.prevent="column.class_name = i" v-for="i in classNames" :key="i" href="#" class="dropdown-item">{{i}}</a>
                   </div>
                 </div>
               </th>
@@ -70,7 +69,7 @@
             <tbody>
             <tr v-for="(item, idx) in previewData.body" :key="idx">
               <td class="text-center">{{idx + 1}}</td>
-              <td v-for="(header, hIdx) in previewData.headers" :key="hIdx">{{item[hIdx]}}</td>
+              <td v-for="(column, hIdx) in value.schema.columns" :key="hIdx">{{item[hIdx]}}</td>
 <!--              <td>Beverages</td>-->
 <!--              <td>Korea</td>-->
 <!--              <td>20/10/2010 at 04:10 AM</td>-->
@@ -123,7 +122,7 @@
         </div>
       </div>
       <div class="col-12 col-sm-5 col-lg-4">
-        <div class="form-group form-group-bi">
+        <div class="form-group form-group-di">
           <label>Column Headers</label>
           <div class="d-flex align-items-center mb-3">
             <label class="di-radio">
@@ -146,11 +145,11 @@
             </i>
           </div>
         </div>
-        <div class="form-group form-group-bi">
+        <div class="form-group form-group-di">
           <label>Delimiter</label>
           <div class="d-flex align-items-center">
             <div class="dropdown">
-              <a href="#" class="btn btn-bi-default w-auto dropdown-toggle" data-toggle="dropdown">
+              <a href="#" class="btn btn-di-default w-auto dropdown-toggle" data-toggle="dropdown">
                 {{setting.delimiter}}
               </a>
               <div class="dropdown-menu">
@@ -162,7 +161,7 @@
             </i>
           </div>
         </div>
-        <div class="form-group form-group-bi">
+        <div class="form-group form-group-di">
           <label class="w-100 d-flex align-items-center">
             <span>Metadata</span>
             <i class="ml-auto">
@@ -190,11 +189,11 @@
             </i>
           </div>
         </div>
-        <div class="form-group form-group-bi">
+        <div class="form-group form-group-di">
           <label>File Encoding</label>
           <div class="d-flex">
             <div class="dropdown">
-              <a href="#" class="btn btn-bi-default w-auto dropdown-toggle" data-toggle="dropdown">
+              <a href="#" class="btn btn-di-default w-auto dropdown-toggle" data-toggle="dropdown">
                 {{setting.encoding}}
               </a>
               <div class="dropdown-menu">
@@ -208,8 +207,8 @@
     <div class="d-flex mt-5 align-items-center">
       <span class="text-muted">Previewing 100 of 100 rows</span>
       <div class="ml-auto">
-        <button @click.prevent="back" class="btn btn-bi-transparent">Back</button>
-        <button @click.prevent="next" class="btn btn-bi-primary">Next</button>
+        <button @click.prevent="back" class="btn btn-di-transparent">Back</button>
+        <button @click.prevent="confirmSchema" class="btn btn-di-primary">Next</button>
       </div>
     </div>
   </div>

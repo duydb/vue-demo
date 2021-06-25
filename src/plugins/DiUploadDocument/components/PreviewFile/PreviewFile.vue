@@ -1,0 +1,147 @@
+<template>
+  <div>
+    <div class="text-right mb-4">
+<!--      <a href="#" class="text-muted">-->
+<!--        <img src="../../assets/icons/ic-16-edit.svg" alt="" width="16" height="16" class="mr-1">-->
+<!--        Preview Selection-->
+<!--      </a>-->
+    </div>
+    <div v-if="value.chunkContainer" class="row">
+      <div class="col-12 col-sm-7 col-lg-8">
+        <div v-if="error" class="d-flex flex-column justify-content-center align-items-center text-center" style="height: 400px">
+          <h6 class="text-danger">Error when calculate preview data!</h6>
+          <p class="text-muted">{{error}}</p>
+          <button @click.prevent="initChunkContainer" class="btn btn-di-primary">Retry</button>
+        </div>
+        <div v-else class="table-container" style="max-height: 500px">
+          <table v-if="value.schema.columns.length > 0" class="table table-striped mb-0">
+            <thead>
+            <tr>
+              <th class="text-center">Name</th>
+              <th v-for="header in value.schema.columns" :key="header.key">
+                <span v-if="value.setting.include_header">{{ header.display_name }}</span>
+                <input v-else v-model="header.display_name" type="text" class="bg-transparent border-0 text-white">
+              </th>
+            </tr>
+            <tr>
+              <th class="text-center">Type</th>
+              <th v-for="column in value.schema.columns" :key="column.name">
+                <div class="dropdown dropdown-th">
+                  <a href="#" class="text-white font-weight-normal dropdown-toggle"
+                     data-toggle="dropdown">{{ COLUMN_DATA_TYPE_NAME[column.class_name] }}</a>
+                  <div class="dropdown-menu">
+                    <a @click.prevent="column.class_name = item.id" v-for="item in classNames" :key="item.id" href="#"
+                       class="dropdown-item">
+                      {{ item.name }}
+                    </a>
+                  </div>
+                </div>
+              </th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="(item, idx) in records" :key="idx">
+              <td class="text-center">{{ idx + 1 }}</td>
+              <td v-for="(column, hIdx) in value.schema.columns" :key="hIdx">{{ item[hIdx] }}</td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-12 col-sm-5 col-lg-4">
+        <div class="form-group form-group-di">
+          <label>Column Headers</label>
+          <div class="d-flex align-items-center mb-3">
+            <label class="di-radio">
+              <input v-model="value.setting.include_header" @change="calcPreviewData" :value="true" type="radio"
+                     name="header">
+              <span></span>
+              <span>User first row as headers</span>
+            </label>
+            <i class="ml-auto">
+              <img src="../../assets/icons/question.svg" alt="" width="16" height="16">
+            </i>
+          </div>
+          <div class="d-flex align-items-center">
+            <label class="di-radio">
+              <input v-model="value.setting.include_header" @change="calcPreviewData" :value="false" type="radio"
+                     name="header">
+              <span></span>
+              <span>Generate headers</span>
+            </label>
+            <i class="ml-auto">
+              <img src="../../assets/icons/question.svg" alt="" width="16" height="16">
+            </i>
+          </div>
+        </div>
+        <div class="form-group form-group-di">
+          <label>Delimiter</label>
+          <div class="d-flex align-items-center">
+            <div class="dropdown">
+              <a href="#" class="btn btn-di-default w-auto dropdown-toggle" data-toggle="dropdown">
+                {{ value.setting.delimiter }}
+              </a>
+              <div class="dropdown-menu">
+                <a @click.prevent="changeDelimiter(item)" v-for="item in delimiters" :key="item" href="#"
+                   class="dropdown-item">{{ item }}</a>
+              </div>
+            </div>
+            <i class="ml-auto">
+              <img src="../../assets/icons/question.svg" alt="" width="16" height="16">
+            </i>
+          </div>
+        </div>
+        <div class="form-group form-group-di">
+          <label class="w-100 d-flex align-items-center">
+            <span>Metadata</span>
+            <i class="ml-auto">
+              <img src="../../assets/icons/question.svg" alt="" width="16" height="16">
+            </i>
+          </label>
+          <div class="d-flex align-items-center mb-3">
+            <label class="di-radio">
+              <input v-model="value.setting.add_batch_info" :value="true" type="radio" name="Metadata">
+              <span></span>
+              <span>Include batch upload metadata</span>
+            </label>
+            <i class="ml-auto">
+              <img src="../../assets/icons/question.svg" alt="" width="16" height="16">
+            </i>
+          </div>
+          <div class="d-flex align-items-center">
+            <label class="di-radio">
+              <input v-model="value.setting.add_batch_info" :value="false" type="radio" name="Metadata">
+              <span></span>
+              <span>Don’t include batch upload metadata</span>
+            </label>
+            <i class="ml-auto">
+              <img src="../../assets/icons/question.svg" alt="" width="16" height="16">
+            </i>
+          </div>
+        </div>
+        <div class="form-group form-group-di">
+          <label>File Encoding</label>
+          <div class="d-flex">
+            <div class="dropdown">
+              <a href="#" class="btn btn-di-default w-auto dropdown-toggle" data-toggle="dropdown">
+                {{ value.setting.encoding }}
+              </a>
+              <div class="dropdown-menu">
+                <a @click.prevent="changeEncoding(item)" v-for="item in encodings" :key="item" href="#"
+                   class="dropdown-item">{{ item }}</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex mt-5 align-items-center">
+      <span class="text-muted">Previewing first {{records.length}} rows</span>
+      <div class="ml-auto">
+        <button @click.prevent="back" class="btn btn-di-transparent">Back</button>
+        <button :disabled="!canNext" @click.prevent="confirmSchema" class="btn btn-di-primary">Next</button>
+      </div>
+    </div>
+  </div>
+</template>
+<script src="./PreviewFile.ctrl.js"></script>

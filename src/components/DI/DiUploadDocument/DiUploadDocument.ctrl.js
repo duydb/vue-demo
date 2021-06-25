@@ -12,7 +12,6 @@ export default {
   data() {
     return {
       model: null,
-      chunkContainer: null,
       setting: new CSVSetting()
     }
   },
@@ -43,10 +42,21 @@ export default {
     initModel() {
       if (!this.model) {
         this.model = new DIUploadDocumentInfo()
+      } else {
+
       }
     },
     show() {
       this.$refs.modal.show()
+    }
+  },
+  watch: {
+    'model.stage'() {
+      if (this.model && this.model.stage === DI_UPLOAD_DOC_STAGE.uploading) {
+        this.$refs.modal.hide()
+        this.$refs.upload.show()
+        this.$refs.upload.startUpload()
+      }
     }
   }
 }

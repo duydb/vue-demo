@@ -1,3 +1,6 @@
+import { DocumentSchema } from './service/entity/DocumentSchema'
+import { CSVSetting } from './service/entity/CSVSetting'
+
 export const DI_UPLOAD_DOC_STAGE = {
   browse_file: 'browse_file',
   preview_file: 'preview_file',
@@ -24,6 +27,8 @@ export class DIUploadDocumentInfo {
     this.stage = stage || DI_UPLOAD_DOC_STAGE.browse_file
     this.files = []
     this.chunkContainer = null
+    this.schema = null //new DocumentSchema()
+    this.setting = new CSVSetting()
   }
 
   title() {

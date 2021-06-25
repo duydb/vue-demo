@@ -8,7 +8,7 @@
       <img class="mx-auto mb-4" src="/static/icons/upload@3x.png" alt="Upload Icon" width="40" height="40">
       <div>DRAG AND DROP FILE</div>
       <div>Drop a document or</div>
-      <a @click.prevent="browserLocalFiles" href="#" class="color-bi-primary">browse your CSV files</a>
+      <a @click.prevent="browserLocalFiles" href="#" class="color-di-primary">browse your CSV files</a>
       <!--      <div>(CSV)</div>-->
     </div>
   </div>

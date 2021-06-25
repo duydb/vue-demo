@@ -1,10 +1,10 @@
 <template>
   <div class="di-theme">
-    <Modal ref="modal" hide-footer :width="1030" @show="initModel" backdrop="static" :keyboard="false" open>
+    <Modal ref="modal" hide-footer :width="1030" @show="initModel" backdrop="static" :keyboard="false">
       <template slot="header">
         <div class="w-100 text-center">
-          <h5 class="modal-title">{{ title }}</h5>
-          <div class="text-muted">{{ desc }}</div>
+          <h5 class="modal-title">{{ model.title }}</h5>
+          <div class="text-muted">{{ model.desc }}</div>
         </div>
       </template>
       <component v-if="bodyComponent" :is="bodyComponent" :value="model"></component>
@@ -12,5 +12,4 @@
     <UploadData ref="upload" :value="model"></UploadData>
   </div>
 </template>
-<script src="./DiUploadDocument.ctrl.js"></script>
-<style src="./DiUploadDocument.style.css"></style>
+<script src="./UploadDocument.ctrl.js"></script>

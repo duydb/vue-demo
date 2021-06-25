@@ -1,4 +1,4 @@
-import { ChunkContainerInfo } from './entity/ChunkContainerInfo'
+import { ChunkContainerInfo } from '../entities/ChunkContainerInfo'
 
 const DocumentService = Object.freeze({
   initChunkContainer(file, chunkSize = 10000) {
@@ -17,7 +17,8 @@ const DocumentService = Object.freeze({
   },
   async readChunk(file, chunkContainer, chunkSize = 10000, encoding) {
     if (chunkContainer.total <= 0) {
-      alert('Please choose file to upload')
+      console.log('Empty chunks')
+      // alert('Please choose file to upload')
       return Promise.resolve(false)
     }
     if (!chunkContainer.processItem) {

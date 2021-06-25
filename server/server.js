@@ -9,11 +9,11 @@ for (let row = 0; row < 2000000; row++) {
     if (col === 0) {
       item.push(row)
     } else if (col === 1) {
-      item.push(`Tiếng Việt ${col + 1}`)
+      item.push(`Tiếng Việt ${row * 1000 + col + 1}`)
     } else if (col === 2) {
-      item.push(new Date().toString())
+      item.push(new Date().to)
     } else if (col === 3) {
-      item.push(+new Date() + row * 100 + col)
+      item.push(+new Date())
     } else if (col === 4) {
       item.push((row + col) % 2 === 0)
     } else {
