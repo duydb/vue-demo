@@ -70,20 +70,20 @@
                       {{ item.error }}
                     </p>
                   </td>
-                  <td>
-                    <div v-if="item.loading || item.success" class="progress progress-di">
-                      <div class="progress-bar" role="progressbar"
-                           aria-valuemin="0" aria-valuemax="100"
-                           :style="{width: item.loadingPercentStr}">
-                      </div>
-                    </div>
-                  </td>
-                  <td class="text-right" style="width: 40px">
-                    <strong v-if="item.success">DONE</strong>
-                    <strong v-else-if="item.error">ERROR</strong>
-                    <span v-else-if="item.loading">{{ item.loadingPercentStr }}</span>
-                    <span v-else>--</span>
-                  </td>
+<!--                  <td>-->
+<!--                    <div v-if="item.loading || item.success" class="progress progress-di">-->
+<!--                      <div class="progress-bar" role="progressbar"-->
+<!--                           aria-valuemin="0" aria-valuemax="100"-->
+<!--                           :style="{width: item.loadingPercentStr}">-->
+<!--                      </div>-->
+<!--                    </div>-->
+<!--                  </td>-->
+<!--                  <td class="text-right" style="width: 40px">-->
+<!--                    <strong v-if="item.success">DONE</strong>-->
+<!--                    <strong v-else-if="item.error">ERROR</strong>-->
+<!--                    <span v-else-if="item.loading">{{ item.loadingPercentStr }}</span>-->
+<!--                    <span v-else>&#45;&#45;</span>-->
+<!--                  </td>-->
                 </tr>
                 </tbody>
               </table>

@@ -142,7 +142,7 @@
       <span class="text-muted">Previewing first {{records.length}} rows</span>
       <div class="ml-auto">
         <button @click.prevent="back" class="btn btn-di-transparent">Back</button>
-        <button :disabled="!canNext" @click.prevent="confirmSchema" class="btn btn-di-primary">Next</button>
+        <button :disabled="!canNext" @click.prevent="next" class="btn btn-di-primary">Next</button>
       </div>
     </div>
   </div>

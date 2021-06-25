@@ -1,7 +1,6 @@
 import DocumentService from '../../services/DocumentService'
-import { TableColumn } from '../../entities/DocumentSchema'
 import UploadDocumentStageMixin from '../../mixins/UploadDocumentStage.mixin'
-import { COLUMN_DATA_TYPE, COLUMN_DATA_TYPE_NAME, DELIMITER, DELIMITER_NAME, ENCODING } from '../../entities/Enum'
+import { COLUMN_DATA_TYPE, COLUMN_DATA_TYPE_NAME, DELIMITER, ENCODING } from '../../entities/Enum'
 import UploadDocumentService from '../../services/UploadDocumentService'
 
 export default {
@@ -58,17 +57,6 @@ export default {
         this.value.setting.delimiter = newDelimiter
         this.calcPreviewData()
       }
-    },
-    async confirmSchema() {
-      // this.loading = true
-      // // let previewData = this.value.chunkContainer.prevProcessItem.lines.join('\n')
-      // // const resp = await UploadDocumentService.preview(previewData, this.value.setting.serialize, this.value.schema.serialize)
-      // // if (this.value.setting.include_header) {
-      // //   previewData = this.value.chunkContainer.prevProcessItem.lines.slice(1).join('\n')
-      // // }
-      // console.log(resp)
-      // this.loading = false
-      this.next()
     }
   }
 }
