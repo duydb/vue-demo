@@ -34,7 +34,7 @@
 import VueDraggable from './components/VueDraggable/VueDraggable.vue'
 import MultiselectDemo from './components/Multiselect/MultiselectDemo.vue'
 import PermittedDemo from './components/Permission/PermittedDemo'
-import UploadLargeFileDemo from './components/UploadLargeFile/UploadLargeFileDemo'
+// import UploadLargeFileDemo from './components/UploadLargeFile/UploadLargeFileDemo'
 import PPMemory from './components/commons/PPMemory'
 import DiUploadDocumentDemo from './components/DI/DiUploadDocument.demo.vue'
 
@@ -47,7 +47,7 @@ export default {
     return {
       components: [
         DiUploadDocumentDemo,
-        UploadLargeFileDemo,
+        // UploadLargeFileDemo,
         PermittedDemo,
         MultiselectDemo,
         VueDraggable
