@@ -1,24 +1,30 @@
 export class ChunkContainerInfo {
-  constructor() {
-    this.total = 0
-  }
-
-  reset() {
-    this.total = 0
-  }
-
-  get total() {
-    return this._total
-  }
-
-  set total(value) {
-    this._total = value
+  constructor(total) {
+    this._total = total
     this._processIndex = 0
     this._items = []
     for (let i = 0; i < this._total; i++) {
       this._items.push(new ChunkItem(i))
     }
   }
+
+  reset() {
+    this._processIndex = 0
+    this.items.forEach(item => item.reset())
+  }
+
+  get total() {
+    return this._total
+  }
+  //
+  // set total(value) {
+  //   this._total = value
+  //   this._processIndex = 0
+  //   this._items = []
+  //   for (let i = 0; i < this._total; i++) {
+  //     this._items.push(new ChunkItem(i))
+  //   }
+  // }
 
   next() {
     this._processIndex += 1
@@ -34,6 +40,14 @@ export class ChunkContainerInfo {
 
   get successItems() {
     return this._items.filter(i => i.success)
+  }
+
+  get failItems() {
+    return this._items.filter(i => i.error)
+  }
+
+  get doneItems() {
+    return this._items.filter(i => i.done)
   }
 
   get loadingPercent() {
@@ -52,14 +66,31 @@ export class ChunkContainerInfo {
   get prevProcessItem() {
     return this._items[this._processIndex - 1]
   }
+
+  get done() {
+    return this.doneItems.length === this.total
+  }
+
+  get success() {
+    return this.done && this.failItems.length === 0
+  }
+
+  get fail() {
+    return this.done && this.failItems.length > 0
+  }
 }
 
 class ChunkItem {
   constructor(index) {
     this.index = index
+    this.reset()
+  }
+
+  reset() {
     this.loading = false
-    this.error = ''
     this.success = false
+    this.error = ''
+    this.done = false
     this.loadingPercent = 0
     this.totalLines = 0
     this.totalCharacter = 0

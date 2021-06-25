@@ -28,52 +28,33 @@ export default {
       this.show()
     },
     async startUpload() {
+      this.loading = true
+      this.currentStartChunkIndex = 0
       while (this.currentStartChunkIndex < this.value.chunkContainer.total) {
         let processItems = this.value.chunkContainer.items.slice(this.currentStartChunkIndex, this.currentStartChunkIndex + POOL_SIZE)
         // step 1: Read chunks
-        for (let i = 0; i < POOL_SIZE; i++) {
-          await DocumentService.readChunk(this.value.files[0], this.value.chunkContainer, this.setting.chunkSize, this.setting.encoding)
-          // this.processUploadChunkItem(this.value.chunkContainer.prevProcessItem)
+        for (let i = 0; i < processItems.length; i++) {
+          await DocumentService.readChunk(this.value.files[0], this.value.chunkContainer, this.value.setting.chunkSize, this.value.setting.encoding)
         }
         await Promise.all(processItems.map(this.processUploadChunkItem))
         this.currentStartChunkIndex += POOL_SIZE
         console.log(`DONE ${this.currentStartChunkIndex}`)
       }
-      // let processItems = this.value.chunkContainer.items.slice(this.currentStartChunkIndex, this.currentStartChunkIndex + POOL_SIZE)
-      // // step 1: Read chunks
-      // for (let i = 0; i < POOL_SIZE; i++) {
-      //   await DocumentService.readChunk(this.value.files[0], this.value.chunkContainer, this.setting.chunkSize, this.setting.encoding)
-      //   // this.processUploadChunkItem(this.value.chunkContainer.prevProcessItem)
-      // }
-      // await Promise.all(processItems.map(this.processUploadChunkItem))
-      // this.currentStartChunkIndex += POOL_SIZE
-      // console.log('DONE')
-
-      // let count = 0
-      // while (count < this.value.chunkContainer.total) {
-      //   let processItems = this.value.chunkContainer.items.slice(count, POOL_SIZE)
-      //   // step 1: Read chunks
-      //   for (let i = 0; i < POOL_SIZE; i++) {
-      //     await DocumentService.readChunk(this.value.files[0], this.value.chunkContainer, this.setting.chunkSize, this.setting.encoding)
-      //     this.processUploadChunkItem(this.value.chunkContainer.prevProcessItem)
-      //   }
-      //   await Promise.all(processItems.map(async chunkItem => {
-      //     await DocumentService.readChunk(this.value.files[0], this.value.chunkContainer, this.setting.chunkSize, this.setting.encoding)
-      //   }))
-      // }
-      // POOL_SIZE
-      // this.processUploadChunkItem(this.value.chunkContainer.prevProcessItem)
-      // console.log(this.value.chunkContainer)
+      this.loading = false
+    },
+    reUpload() {
+      this.value.chunkContainer.reset()
+      this.startUpload()
     },
     processUploadChunkItem(chunkItem) {
       chunkItem.loading = true
       // setting.include_header
       let data = chunkItem.lines.join('\n')
-      if (this.setting.include_header && chunkItem.index === 0) {
+      if (this.value.setting.include_header && chunkItem.index === 0) {
         data = chunkItem.lines.slice(1).join('\n')
       }
       return UploadDocumentService.upload({
-        'csv_id': this.value.register.id,
+        'csv_id': this.value.registerInfo.id,
         'batch_number': chunkItem.index,
         'data': data,
         'is_end': chunkItem.index === this.value.chunkContainer.total - 1
@@ -83,16 +64,18 @@ export default {
           chunkItem.loadingPercent = (100 * processEvent.loaded / processEvent.total).toFixed(1)
         }
       }).then(resp => {
-        chunkItem.success = true
-        chunkItem.loading = false
-        // Release Memory
-        chunkItem.lines = []
-        // return DocumentService.readChunk(this.value.files[0], this.value.chunkContainer, this.setting.chunkSize, this.setting.encoding)
-      }).catch(error => {
-        chunkItem.loading = false
-        chunkItem.loadingPercent = 0
-        chunkItem.error = error.message
-        console.log(error)
+        if (resp.error) {
+          chunkItem.loading = false
+          chunkItem.loadingPercent = 0
+          chunkItem.error = resp.message
+          console.log(resp.message)
+        } else {
+          chunkItem.success = true
+          chunkItem.loading = false
+          delete chunkItem.lines
+          chunkItem.lines = []
+        }
+        chunkItem.done = true
       })
     }
   }

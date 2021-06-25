@@ -12,10 +12,21 @@ export default {
   components: { Modal, UploadData },
   data() {
     return {
-      model: new UploadDocumentInfo()
+      model: null
     }
   },
   computed: {
+    title() {
+      if (this.model) return this.model.title
+      return ''
+    },
+    desc() {
+      if (this.model) return this.model.desc
+      return ''
+    },
+    isRenderUploadData() {
+      return this.model && this.model.stage === UPLOAD_STAGE.uploading
+    },
     bodyComponent() {
       if (!this.model) return null
       switch (this.model.stage) {
@@ -35,18 +46,23 @@ export default {
     },
     initModel() {
       // if (!this.model) {
-      //   this.model = new DIUploadDocumentInfo()
+      this.model = new UploadDocumentInfo()
       // } else {
       //
       // }
     },
     show() {
-      this.$refs.modal.show()
+      if (this.$refs.upload && this.$refs.upload.backgroundRunning) {
+        this.$refs.upload.maximize()
+      } else {
+        this.initModel()
+        this.$refs.modal.show()
+      }
     }
   },
   watch: {
     'model.stage'() {
-      if (this.model && this.model.stage === UPLOAD_STAGE.uploading) {
+      if (this.isRenderUploadData) {
         this.$refs.modal.hide()
         this.$refs.upload.show()
         this.$refs.upload.startUpload()

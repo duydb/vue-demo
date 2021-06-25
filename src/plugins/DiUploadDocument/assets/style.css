@@ -46,6 +46,10 @@
   vertical-align: middle;
 }
 
+.di-theme .table.table-sm td, .di-theme .table.table-sm th {
+  height: auto;
+}
+
 .di-theme .table tr td:first-child, .di-theme .table tr th:first-child {
   border-left: none;
 }

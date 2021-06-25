@@ -4,7 +4,8 @@ const INSTANCE = {
   config: {
     api: '',
     headers: {},
-    componentName: 'DiUploadComponent'
+    componentName: 'DiUploadComponent',
+    chunkSize: 100000
   },
   http: null,
   initHttpClient() {

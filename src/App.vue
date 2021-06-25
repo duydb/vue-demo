@@ -36,7 +36,7 @@ import MultiselectDemo from './components/Multiselect/MultiselectDemo.vue'
 import PermittedDemo from './components/Permission/PermittedDemo'
 import UploadLargeFileDemo from './components/UploadLargeFile/UploadLargeFileDemo'
 import PPMemory from './components/commons/PPMemory'
-import DiUploadDocumentDemo from './components/DI/DiUploadDocument/DiUploadDocument.demo.vue'
+import DiUploadDocumentDemo from './components/DI/DiUploadDocument.demo.vue'
 
 export default {
   name: 'App',

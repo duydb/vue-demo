@@ -11,7 +11,8 @@ import DiUploadDocumentPlugin from '@/plugins/DiUploadDocument/index.js'
 Vue.use(DiUploadDocumentPlugin, {
   api: 'http://dev.datainsider.co/api',
   headers: { 'DI-SERVICE-KEY': '12345678' },
-  componentName: 'DiUploadComponent'
+  componentName: 'DiUploadComponent',
+  chunkSize: 10000
 })
 //
 // import DiUploadDocument from './DiUploadDocument.vue'

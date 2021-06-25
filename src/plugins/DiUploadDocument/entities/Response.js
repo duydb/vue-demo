@@ -12,6 +12,14 @@ export class PreviewDocumentResp extends deneric.Entity {
   }
 }
 
+export class RegisterDocumentResp extends deneric.Entity {
+  constructor(data) {
+    super(data, {
+      id: ['id', deneric.String]
+    })
+  }
+}
+
 export class GetListDatabaseResp extends deneric.Entity {
   constructor(data) {
     super(data, {

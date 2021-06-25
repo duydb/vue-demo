@@ -1,5 +1,5 @@
 import { http } from './Common'
-import { PreviewDocumentResp } from '../entities/Response'
+import { PreviewDocumentResp, RegisterDocumentResp } from '../entities/Response'
 
 export default {
   get(csvId) {
@@ -17,7 +17,10 @@ export default {
     })
   },
   register(data) {
-    return http().post('/ingestion/csv/register', data)
+    return http().post('/ingestion/csv/register', data).then(resp => {
+      resp.data = new RegisterDocumentResp(resp.data)
+      return resp
+    })
   },
   upload(data, onUploadProgress) {
     return http().post('/ingestion/csv/upload', data, {

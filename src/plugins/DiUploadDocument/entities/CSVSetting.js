@@ -1,4 +1,6 @@
 import deneric from 'deneric'
+import {config} from '../services/Common'
+import { ENCODING } from './Enum'
 
 export class CSVSetting extends deneric.Entity {
   constructor(data) {
@@ -7,8 +9,8 @@ export class CSVSetting extends deneric.Entity {
       'delimiter': ['delimiter', deneric.String, ','],
       'quote': ['quote', deneric.String],
       'add_batch_info': ['add_batch_info', deneric.Boolean],
-      'encoding': ['encoding', deneric.String, 'UTF-8'],
-      'chunkSize': ['chunkSize', deneric.Number, 1000]
+      'encoding': ['encoding', deneric.String, ENCODING.UTF_8],
+      'chunkSize': ['chunkSize', deneric.Number, config.chunkSize]
     })
   }
 }

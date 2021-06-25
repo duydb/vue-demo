@@ -9,6 +9,7 @@ export class UploadDocumentInfo {
     this.chunkContainer = null
     this.schema = new DocumentSchema()
     this.setting = new CSVSetting()
+    this.registerInfo = null
   }
 
   get title() {

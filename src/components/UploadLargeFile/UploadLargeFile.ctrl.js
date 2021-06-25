@@ -1,6 +1,6 @@
-import { ChunkContainerInfo } from './UploadLargeFile.entity'
+import { ChunkContainerInfo } from '../../plugins/DiUploadDocument/entities/ChunkContainerInfo'
 import { fileSize, numberFixed } from '@/misc/Utils'
-import DocumentService from '../DI/DiUploadDocument/service/DocumentService'
+import DocumentService from '../../plugins/DiUploadDocument/services/DocumentService'
 
 export default {
   name: 'UploadLargeFile',
@@ -50,7 +50,7 @@ export default {
         return
       }
       // this.uploading = true
-      this.chunk.total = Math.ceil(this.file.size / this.chunkSize)
+      this.chunk = new ChunkContainerInfo(Math.ceil(this.file.size / this.chunkSize))
       for (const item of this.chunk.items) {
         console.log(item, item === this.chunk.processItem)
         console.log(this.chunk._processIndex)

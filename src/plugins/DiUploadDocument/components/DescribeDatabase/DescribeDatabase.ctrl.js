@@ -4,7 +4,7 @@ import UploadDocumentStageMixin from '../../mixins/UploadDocumentStage.mixin'
 import { Database } from '../../entities/DocumentSchema'
 
 export default {
-  name: 'PreviewFile',
+  name: 'DescribeDatabase',
   mixins: [UploadDocumentStageMixin],
   data() {
     return {
@@ -85,24 +85,45 @@ export default {
         this.database.mapDetail[databaseName] = resp.data
       }
     },
+    makeNameFromDisplayName(displayName = '') {
+      return displayName.toLowerCase().replace(/[^(\d\w_)]/g, '_')
+    },
     async getTargetDatabase() {
-      if (this.database.createNew) {
+      if (this.database.createNew && this.database.createNewModel.length <= 0) {
+        alert('Please input database name')
+        this.$refs.newDatabase.focus()
+        return null
+      } else if (this.database.createNew) {
+        this.database.loading = true
+        this.loading = true
         const newDB = new Database({
           name: this.makeNameFromDisplayName(this.database.createNewModel),
           display_name: this.database.createNewModel
         })
         const resp = await SchemaService.createDatabase(newDB.serialize)
+        this.database.loading = false
+        this.loading = false
+        if (resp.error) {
+          alert(`Create database fail. ${resp.message}`)
+          this.$refs.newDatabase.focus()
+          return null
+        } else {
+          this.database.items.push(resp.data)
+          this.selectDatabase(resp.data)
+        }
         return { name: resp.data.name }
       } else if (this.database.model) {
         return this.database.model
       }
+      alert('Please select database')
       return null
     },
-    makeNameFromDisplayName(displayName = '') {
-      return displayName.toLowerCase().replace(/[^(\d\w_)]/g, '_')
-    },
     getTargetTable() {
-      if (this.table.createNew) {
+      if (this.table.createNew && this.table.createNewModel.length <= 0) {
+        alert('Please input table name')
+        this.$refs.newTable.focus()
+        return null
+      } else if (this.table.createNew) {
         return {
           display_name: this.table.createNewModel,
           name: this.makeNameFromDisplayName(this.table.createNewModel)
@@ -110,38 +131,32 @@ export default {
       } else if (this.table.model) {
         return this.table.model
       }
+      alert('Please select table')
       return null
     },
-    register() {
-      let database = this.getTargetDatabase()
+    async register() {
+      let database = await this.getTargetDatabase()
       let table = this.getTargetTable()
-      if (!database) {
-        alert('Please select database')
+      if (!database || !table) {
         return
       }
-      if (!table) {
-        alert('Please select table')
-        return
-      }
-      // debugger
-      // this.value.schema.name = this.value.files[0].name
-      // this.value.schema.batch_size = this.value.chunkContainer.total
-      // this.value.schema.batch_size = this.value.chunkContainer.total
+      this.loading = true
       this.value.schema.db_name = database.name
       this.value.schema.name = table.name
       this.value.schema.display_name = table.display_name
-      this.loading = true
-      UploadDocumentService.register({
+      const resp = await UploadDocumentService.register({
         'file_name': this.value.files[0].name,
         'batch_size': this.value.chunkContainer.total,
         'schema': this.value.schema.serialize,
         'csv_setting': this.value.setting.serialize
-      }).then(resp => {
-        this.value.register = resp.data
-        this.value.next()
-      }).catch(error => {
-        alert(error)
       })
+      if (resp.error) {
+        alert(`Register document fail. ${resp.message}`)
+      } else {
+        this.value.registerInfo = resp.data
+        this.value.next()
+      }
+      this.loading = false
     }
   }
 }

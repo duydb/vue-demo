@@ -6,15 +6,18 @@
 <!--        Preview Selection-->
 <!--      </a>-->
     </div>
-    <div v-if="value.chunkContainer" class="row">
+    <div class="row">
       <div class="col-12 col-sm-7 col-lg-8">
         <div v-if="error" class="d-flex flex-column justify-content-center align-items-center text-center" style="height: 400px">
           <h6 class="text-danger">Error when calculate preview data!</h6>
           <p class="text-muted">{{error}}</p>
           <button @click.prevent="initChunkContainer" class="btn btn-di-primary">Retry</button>
         </div>
-        <div v-else class="table-container" style="max-height: 500px">
-          <table v-if="value.schema.columns.length > 0" class="table table-striped mb-0">
+        <div v-else-if="loading" class="d-flex flex-column justify-content-center align-items-center text-center" style="height: 400px">
+          <p class="text-muted">Calculate preview data...</p>
+        </div>
+        <div v-else class="table-container" style="height: 400px">
+          <table class="table table-striped mb-0">
             <thead>
             <tr>
               <th class="text-center">Name</th>

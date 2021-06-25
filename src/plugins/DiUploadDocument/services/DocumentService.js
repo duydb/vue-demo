@@ -2,7 +2,6 @@ import { ChunkContainerInfo } from '../entities/ChunkContainerInfo'
 
 const DocumentService = Object.freeze({
   initChunkContainer(file, chunkSize = 10000) {
-    const container = new ChunkContainerInfo()
     if (!file) {
       alert('Please choose file to upload')
       return
@@ -11,9 +10,7 @@ const DocumentService = Object.freeze({
       alert('Please choose other file. The size of this file is zero!')
       return
     }
-    container.total = Math.ceil(file.size / chunkSize)
-    // container.items.forEach(this.readChunk)
-    return container
+    return new ChunkContainerInfo(Math.ceil(file.size / chunkSize))
   },
   async readChunk(file, chunkContainer, chunkSize = 10000, encoding) {
     if (chunkContainer.total <= 0) {
@@ -56,7 +53,6 @@ const DocumentService = Object.freeze({
         if (chunkContainer.processItem.lines.length > 1) {
           chunkContainer.processItem.fixedLastLine = chunkContainer.processItem.lines[chunkContainer.processItem.lines.length - 1]
         }
-
         chunkContainer.next()
         resolve(true)
 
