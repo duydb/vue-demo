@@ -97,7 +97,8 @@ class ChunkItem {
     this.firstLine = ''
     this.lastLine = ''
     this.fixedFirstLine = ''
-    this.fixedLastLine = ''
+    // this.fixedLastLine = ''
+    this.startLineNumber = 0
     this.lines = []
   }
 

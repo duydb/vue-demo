@@ -35,23 +35,30 @@ const DocumentService = Object.freeze({
         const totalCharacter = content.length
         // const lastLine = lines[totalLines - 1]
         // console.log([lastLine])
-        chunkContainer.processItem.totalLines = totalLines
+        chunkContainer.processItem.startLineNumber = 0
+        // chunkContainer.processItem.totalLines = totalLines
         chunkContainer.processItem.totalCharacter = totalCharacter
         chunkContainer.processItem.firstLine = lines[0]
         chunkContainer.processItem.lastLine = lines[totalLines - 1]
 
         if (chunkContainer.prevProcessItem) {
+          chunkContainer.processItem.startLineNumber = chunkContainer.prevProcessItem.startLineNumber + chunkContainer.prevProcessItem.totalLines
           chunkContainer.processItem.fixedFirstLine = [(chunkContainer.prevProcessItem.lastLine || ''), chunkContainer.processItem.firstLine].join('')
-          chunkContainer.processItem.fixedLastLine = ''
+          // chunkContainer.processItem.fixedLastLine = ''
         } else {
           chunkContainer.processItem.fixedFirstLine = chunkContainer.processItem.firstLine
-          chunkContainer.processItem.fixedLastLine = ''
+          // chunkContainer.processItem.fixedLastLine = ''
         }
 
-        chunkContainer.processItem.lines = [chunkContainer.processItem.fixedFirstLine].concat(lines.slice(1, lines.length - 2))
-        chunkContainer.processItem.totalLines = lines.length
+        if (chunkContainer.processItem.index === chunkContainer.total - 1) {
+          chunkContainer.processItem.lines = [chunkContainer.processItem.fixedFirstLine].concat(lines.slice(1))
+        } else {
+          chunkContainer.processItem.lines = [chunkContainer.processItem.fixedFirstLine].concat(lines.slice(1, chunkContainer.processItem.lines.length - 1))
+        }
+
+        chunkContainer.processItem.totalLines = chunkContainer.processItem.lines.length
         if (chunkContainer.processItem.lines.length > 1) {
-          chunkContainer.processItem.fixedLastLine = chunkContainer.processItem.lines[chunkContainer.processItem.lines.length - 1]
+          // chunkContainer.processItem.fixedLastLine = chunkContainer.processItem.lines[chunkContainer.processItem.lines.length - 1]
         }
         chunkContainer.next()
         resolve(true)

@@ -15,8 +15,8 @@
         </div>
       </div>
       <button @click.prevent="calculateFile" class="btn btn-primary text-nowrap ml-2" type="button">Calculate</button>
-<!--      <button @click.prevent="readChunk" class="btn btn-primary text-nowrap ml-2" type="button">Read Chunk</button>-->
-<!--      <button @click.prevent="reset" class="btn btn-outline-primary text-nowrap ml-2" type="button">Reset</button>-->
+      <!--      <button @click.prevent="readChunk" class="btn btn-primary text-nowrap ml-2" type="button">Read Chunk</button>-->
+      <!--      <button @click.prevent="reset" class="btn btn-outline-primary text-nowrap ml-2" type="button">Reset</button>-->
     </div>
     <div v-if="chunk.total > 0" class="mt-3">
       <div class="alert alert-primary" role="alert">
@@ -45,48 +45,55 @@
             {{ item.name }}
           </td>
           <td>
-            {{item.totalLines | numberFixed}}
+            {{ item.totalLines | numberFixed }}
           </td>
           <td>
-            {{item.totalCharacter | numberFixed}}
+            {{ item.totalCharacter | numberFixed }}
           </td>
-<!--          <td class="align-middle">-->
-<!--            <h5>totalLines= ${item.totalLines} | totalCharacter = ${item.totalCharacter}</h5>-->
-<!--            <h6>Last Line: </h6>-->
-<!--            <div>${lastLine}</div>-->
-<!--          </td>-->
-<!--          <td class="align-middle">-->
-<!--            <div class="progress">-->
-<!--              <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0"-->
-<!--                   aria-valuemax="100"-->
-<!--                   :style="{width: item.loadingPercentStr}">-->
-<!--                {{ item.loadingPercentStr }}-->
-<!--              </div>-->
-<!--            </div>-->
-<!--          </td>-->
+          <!--          <td class="align-middle">-->
+          <!--            <h5>totalLines= ${item.totalLines} | totalCharacter = ${item.totalCharacter}</h5>-->
+          <!--            <h6>Last Line: </h6>-->
+          <!--            <div>${lastLine}</div>-->
+          <!--          </td>-->
+          <!--          <td class="align-middle">-->
+          <!--            <div class="progress">-->
+          <!--              <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuemin="0"-->
+          <!--                   aria-valuemax="100"-->
+          <!--                   :style="{width: item.loadingPercentStr}">-->
+          <!--                {{ item.loadingPercentStr }}-->
+          <!--              </div>-->
+          <!--            </div>-->
+          <!--          </td>-->
         </tr>
         <tr>
           <th class="text-danger">First Line</th>
           <td colspan="2">
-            <span class="text-muted">{{item.firstLine}}</span>
+            <span class="text-muted">{{ item.firstLine }}</span>
           </td>
         </tr>
         <tr>
           <th class="text-danger">Last Line</th>
           <td colspan="2">
-            <span class="text-muted">{{item.lastLine}}</span>
+            <span class="text-muted">{{ item.lastLine }}</span>
           </td>
         </tr>
         <tr>
           <th class="text-success">Fixed First Line</th>
           <td colspan="2">
-            <span class="text-muted">{{item.fixedFirstLine}}</span>
+            <span class="text-muted">{{ item.fixedFirstLine }}</span>
           </td>
         </tr>
         <tr>
-          <th class="text-success">Fixed Last Line</th>
+          <th>Body</th>
           <td colspan="2">
-            <span class="text-muted">{{item.fixedLastLine}}</span>
+            <div style="overflow-x: auto; max-width: calc(100vw - 600px);">
+              <div v-for="(line, idx) in item.lines" :key="idx" class="text-nowrap">
+                <code>
+                  {{ item.startLineNumber + idx + 1 }}.
+                </code>
+                <span>{{ line }}</span>
+              </div>
+            </div>
           </td>
         </tr>
         </tbody>
@@ -94,9 +101,9 @@
     </div>
   </div>
 </template>
-<script src="./UploadLargeFile.ctrl.js"></script>
+<script src="./ReadLargeFile.ctrl.js"></script>
 <style scoped>
 .bg-light {
-  background-color: #efefef!important;
+  background-color: #efefef !important;
 }
 </style>

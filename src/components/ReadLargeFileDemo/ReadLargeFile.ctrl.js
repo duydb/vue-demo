@@ -50,7 +50,7 @@ export default {
         return
       }
       // this.uploading = true
-      this.chunk = new ChunkContainerInfo(Math.ceil(this.file.size / this.chunkSize))
+      this.chunk = DocumentService.initChunkContainer(this.file, this.chunkSize)// new ChunkContainerInfo(Math.ceil(this.file.size / this.chunkSize))
       for (const item of this.chunk.items) {
         console.log(item, item === this.chunk.processItem)
         console.log(this.chunk._processIndex)

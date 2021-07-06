@@ -74,7 +74,7 @@ export default {
     async getListDatabase() {
       this.database.loading = true
       const resp = await SchemaService.getListDatabase()
-      this.database.items = resp.data
+      this.database.items = resp.data.sort((a, b) => a.display_name.localeCompare(b.display_name))
       this.database.loading = false
     },
     async getDatabaseDetail(databaseName) {

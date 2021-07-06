@@ -16,18 +16,18 @@
     <div class="row">
       <div class="col-12">
         <div class="form-group">
-          <UploadLargeFile :chunkSize="chunkSize"></UploadLargeFile>
+          <ReadLargeFile :chunkSize="chunkSize"></ReadLargeFile>
         </div>
       </div>
     </div>
   </div>
 </template>
 <script>
-import UploadLargeFile from './UploadLargeFile'
+import ReadLargeFile from './ReadLargeFile.vue'
 
 export default {
-  name: 'UploadLargeFileDemo',
-  components: { UploadLargeFile },
+  name: 'ReadLargeFileDemo',
+  components: { ReadLargeFile },
   data() {
     return {
       chunkSize: 1000000

@@ -1,6 +1,6 @@
 import { http } from './Common'
 import { GetListDatabaseResp } from '../entities/Response'
-import { Database, DatabaseDetail } from '../entities/DocumentSchema'
+import { Database } from '../entities/DocumentSchema'
 
 const SchemaService = Object.freeze({
   getListDatabase() {
