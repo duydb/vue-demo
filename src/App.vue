@@ -37,6 +37,7 @@ import PermittedDemo from './components/Permission/PermittedDemo'
 import ReadLargeFileDemo from './components/ReadLargeFileDemo/ReadLargeFileDemo'
 import PPMemory from './components/commons/PPMemory'
 import DiUploadDocumentDemo from './components/DI/DiUploadDocument.demo.vue'
+import DatabaseRelationshipDemo from './components/DatabaseRelationship/DatabaseRelationshipDemo'
 
 export default {
   name: 'App',
@@ -46,6 +47,7 @@ export default {
   data() {
     return {
       components: [
+        DatabaseRelationshipDemo,
         DiUploadDocumentDemo,
         ReadLargeFileDemo,
         PermittedDemo,
