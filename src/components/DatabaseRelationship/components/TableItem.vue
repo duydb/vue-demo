@@ -38,6 +38,7 @@ export default {
   inject: ['getContainment', 'onNewConnection', 'offNewConnection'],
   data() {
     this.connections = []
+    this.otherConnections = []
     return {}
   },
   mounted() {
@@ -85,8 +86,32 @@ export default {
         console.log('Add Connection', this.table.name, newConnection)
       }
     },
+    calcSocketOption(startEl, endEl) {
+      const $startEl = $(startEl)
+      const $endEl = $(endEl)
+      let startSocket = 'left'
+      let endSocket = 'left'
+      const startLeft = $startEl.offset().left
+      const startWidth = $startEl.width()
+      const endLeft = $endEl.offset().left
+      const endWidth = $endEl.width()
+
+      if (startLeft + startWidth < endLeft) {
+        startSocket = 'right'
+        endSocket = 'left'
+      } else if (endLeft + endWidth < startLeft) {
+        startSocket = 'left'
+        endSocket = 'right'
+      }
+      return {
+        startSocket,
+        endSocket
+      }
+    },
     processMoveTable() {
       this.connections.forEach(connection => {
+        const socketOption = this.calcSocketOption(connection.start, connection.end)
+        connection.setOptions(socketOption)
         connection.position()
       })
     },
@@ -112,24 +137,25 @@ export default {
       e.target.classList.remove('active')
     },
     onDrop(e, column) {
-      const sourceId = e.dataTransfer.getData(DATA_TRANSFER_KEY.column_ele_id)
-      const sourceTableName = e.dataTransfer.getData(DATA_TRANSFER_KEY.table_name)
-      const sourceColumnName = e.dataTransfer.getData(DATA_TRANSFER_KEY.column_name)
-
+      const srcId = e.dataTransfer.getData(DATA_TRANSFER_KEY.column_ele_id)
+      const srcTableName = e.dataTransfer.getData(DATA_TRANSFER_KEY.table_name)
+      const srcColumnName = e.dataTransfer.getData(DATA_TRANSFER_KEY.column_name)
+      const srcEl = document.getElementById(srcId)
+      const socketOption = this.calcSocketOption(srcEl, e.target)
       const connection = new LeaderLine(
-        document.getElementById(sourceId),
+        srcEl,
         e.target,
         {
           size: 2,
           color: 'rgba(255, 255, 255, 0.9)',
           startPlug: 'behind',
-          endPlug: 'behind'
-          // middleLabel: LeaderLine.pathLabel(sourceColumnName + ' & ' + column.name)
+          endPlug: 'behind',
+          ...socketOption
         }
       )
       const sourceData = {
-        tableName: sourceTableName,
-        columnName: sourceColumnName
+        tableName: srcTableName,
+        columnName: srcColumnName
       }
       const destData = {
         tableName: this.table.name,
